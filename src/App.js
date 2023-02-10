@@ -9,7 +9,22 @@ import {
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+/*  this.state = {
+    currentUser = {
+      firstName,
+      lastName,
+      userName,
+      hashedPassword,
+      email,
+      location,
+      friends,
+      posts,
+      img,
+      timestamps
+    }
 
+    allUsers: []
+} */
     this.state = {
       users: []
     };
