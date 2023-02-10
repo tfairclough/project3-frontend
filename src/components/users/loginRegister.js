@@ -1,6 +1,8 @@
 import React from 'react'
 import { getAllUsers } from './api'
 import { createNewUser } from './api'
+import { userSeedData } from '../../seedData'
+import { registerAllUsers } from './api'
 
 
 export default class Login extends React.Component {
@@ -8,14 +10,7 @@ export default class Login extends React.Component {
     super(props)
 
     this.state = {
-      createUser: {
-        user: {
-          firstName: "aaaaaaa",
-          lastName: "aaaaaaa",
-          userName: "aaaaaaa",
-          password: "aaaaaaa",
-      }
-    }
+      dummyUsers: userSeedData
   }
   }
 
@@ -30,11 +25,11 @@ export default class Login extends React.Component {
         })
   }
 
-  createUser = (e) => {
+  addDummyUsers = (e) => {
     e.preventDefault()
     console.log('button working')
     // call the create a users api that we imported from api.js and pass the createUser state
-    createNewUser(this.state.createUser)
+    registerAllUsers(this.state.dummyUsers)
       .then((res) => {
         console.log('user created')
       })
@@ -65,6 +60,7 @@ export default class Login extends React.Component {
   render() {
     return(
       <>
+      <button onClick={this.addDummyUsers}>add seed users</button>
         <form>
             <input type="text" placeholder="Username or email" />
             <input type="password" placeholder="Password" />
