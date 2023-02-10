@@ -1,5 +1,10 @@
 import React from 'react'
 import Login from './components/users/loginRegister';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,11 +24,14 @@ export default class App extends React.Component {
 
   render() {
     return(
-      <>
-        <h1>Social app</h1>
-        <Login  users={this.state.users}
-                    setUsers={this.setUsers}/>
-      </>
+      <Router>
+        <>
+          <h1>Naptser Social app</h1>
+          <Route exact path="/" component = { () => <Login users={this.state.users} setUsers={this.setUsers}/>}/>
+          <Route exact path = "/feed"/> 
+          <Route exact path = "/profile"/> 
+        </>
+      </Router>
     )
   }
 } 
