@@ -1,5 +1,6 @@
 import React from 'react'
 import Login from './components/users/loginRegister';
+import Profile from './components/profile/profile';
 import {
   BrowserRouter as Router,
   Route,
@@ -19,7 +20,9 @@ export default class App extends React.Component {
         password: 'test',
         email: 'test',
         location: 'test',
-        friends: ['test'],
+        friends: [{firstName: 'Tom',
+                  lastName: 'Fairclough',
+                  }],
         img: 'test',
         timestamps: 'test'
       }
@@ -49,7 +52,7 @@ export default class App extends React.Component {
           {/* Creating the React Paths to different pages */}
           <Route exact path="/" component = { () => <Login users={this.state.users} setUsers={this.setUsers}/>}/>
           <Route exact path = "/feed"/> 
-          <Route exact path = "/profile"/> 
+          <Route exact path = "/profile" component={() => <Profile currentUser={this.state.currentUser}/>}/>
 
         </>
       </Router>
