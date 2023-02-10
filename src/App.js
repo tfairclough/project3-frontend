@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom' 
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,9 +47,9 @@ export default class App extends React.Component {
           </nav>
 
           {/* Creating the React Paths to different pages */}
-          <Route exact path="/" component = { () => <Login users={this.state.users} setUsers={this.setUsers}/>}/>
-          <Route exact path = "/feed"/> 
-          <Route exact path = "/profile"/> 
+          <Route exact path="/" component={Login} />
+          <Route path = "/feed"/> 
+          <Route path = "/profile"/> 
 
         </>
       </Router>

@@ -4,7 +4,7 @@ import { createNewUser } from './api'
 import { userSeedData } from '../../seedData'
 import { registerAllUsers } from './api'
 
-
+ 
 export default class Login extends React.Component {
   constructor(props) {
     super(props)
@@ -14,23 +14,23 @@ export default class Login extends React.Component {
   }
   }
 
-  componentDidMount() {
-    // call the get all users api that we imported from api.js
-    getAllUsers()
-        .then((response) => {
-            this.props.setUsers(response.data.users)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-  }
+  // componentDidMount() {
+  //   // call the get all users api that we imported from api.js
+  //   getAllUsers()
+  //       .then((response) => {
+  //           this.props.setUsers(response.data.users)
+  //       })
+  //       .catch((err) => {
+  //           console.log(err)
+  //       })
+  // }
 
   addDummyUsers = (e) => {
     e.preventDefault()
     console.log('button working')
     // call the create a users api that we imported from api.js and pass the createUser state
     registerAllUsers(this.state.dummyUsers)
-      .then((res) => {
+      .then(() => {
         console.log('user created')
       })
       .catch((err) => {
