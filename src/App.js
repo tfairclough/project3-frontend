@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import Login from './components/users/loginRegister';
 
 export default class App extends React.Component {
   constructor(props) {
