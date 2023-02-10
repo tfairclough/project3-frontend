@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from './components/users/loginRegiater';
+import Login from './components/users/loginRegister';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class App extends React.Component {
     };
   }
 
+  // method to take all users returned from the database from the getAllUsers api and add them to the users state
   setUsers = (users) => {
     this.setState({
       users: users,
