@@ -7,4 +7,4 @@ export const getAllUsers = () => {
 } 
 // api to create a user
 export const createNewUser = (userDetails) => {
-    return axios.post(`${apiUrl}/users`, userDetails)} 
+    return axios.post(`${apiUrl}/register`, userDetails)} 
