@@ -9,12 +9,12 @@ export default class Login extends React.Component {
 
     this.state = {
       createUser: {
-        "user":{
-          "firstName": "newTest",
-          "lastName": "User3542",
-          "userName": "Hello123333",
-          "password": "1545663223"
-          }
+        user: {
+          firstName: "aaaaaaa",
+          lastName: "aaaaaaa",
+          userName: "aaaaaaa",
+          password: "aaaaaaa",
+      }
     }
   }
   }
