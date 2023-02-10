@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from './components/users/loginRegiater';
+import Login from './components/users/loginRegister';
 
 export default class App extends React.Component {
   constructor(props) {
