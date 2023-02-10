@@ -26,7 +26,18 @@ export default class App extends React.Component {
     allUsers: []
 } */
     this.state = {
-      users: []
+      users: [],
+      currentUser: {
+        firstName: 'test',
+        lastName: 'test',
+        userName: 'test',
+        password: 'test',
+        email: 'test',
+        location: 'test',
+        friends: ['test'],
+        img: 'test',
+        timestamps: 'test'
+      }
     };
   }
 
