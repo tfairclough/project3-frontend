@@ -4,13 +4,13 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom' 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-/*  this.state = {
-    currentUser = {
+ this.state = {
+    currentUser: {
       firstName,
       lastName,
       userName,
@@ -22,11 +22,17 @@ export default class App extends React.Component {
       img,
       timestamps
     }
+  }
 
-    allUsers: []
-} */
+    // Retrieve token from local storage
+    const getToken = () => {
+        const tokenString = localStorage.getItem('token');
+        console.log('tokenString: ', tokenString);
+        return tokenString || '';
+    };
+
     this.state = {
-      users: [],
+      token: getToken(),
       currentUser: {
         firstName: 'test',
         lastName: 'test',
@@ -41,6 +47,17 @@ export default class App extends React.Component {
     };
   }
 
+  // Removes token from local storage and sets URL to /login 
+  logout = () => {
+    localStorage.removeItem('token');
+    this.setState({
+      token: ''
+    }, () => {
+      window.history.pushState({}, 'Login', '/login');
+    });
+  }
+  
+
   // method to take all users returned from the database from the getAllUsers api and add them to the users state
   setUsers = (users) => {
     this.setState({
@@ -48,7 +65,22 @@ export default class App extends React.Component {
     })
   }
 
+  // Saves token to local storage
+  saveToken = (userToken) => {
+    localStorage.setItem('token', userToken);
+    this.setState({
+      token: userToken
+    });
+  };
+
   render() {
+    const { token } = this.state;
+
+    // Checks if a token exists if not the login page is loaded
+    if (!token) {
+      return <Login setToken={this.saveToken} />;
+    } else {
+
     return(
       <Router>
         <>
@@ -56,19 +88,56 @@ export default class App extends React.Component {
 
           {/* Nav bar links to each React Route */}
           <nav>
-            <Link to = "/">Log In</Link>  
             <Link to = "/feed">Feed</Link>
             <Link to = "/profile">Profile</Link>
+
+            {/* Logout button */}
+            <button onClick={this.logout}>Logout</button>
           </nav>
 
           {/* Creating the React Paths to different pages */}
-          <Route exact path="/" component = { () => <Login users={this.state.users} setUsers={this.setUsers}/>}/>
-          <Route exact path = "/feed"/> 
-          <Route exact path = "/profile"/> 
+          <Route path = "/feed"/> 
+          <Route path = "/profile"/> 
 
         </>
       </Router>
     )
+    }
   }
 } 
 
+// Alternative code to use functional components 
+// import useToken from './useToken';
+// import { useState } from 'react';
+
+
+// function App() {
+
+//   const { token, setToken } = useToken();
+
+//   const logout = () => {
+//     localStorage.removeItem('token');
+//     setToken('');
+//   };
+
+//   if(!token) {
+//     return <Login setToken={setToken} />
+//   } else {
+//   return(
+//     <div className="wrapper">
+//       <h1>Application</h1>
+//       <button onClick={logout}>Logout</button>
+//       <BrowserRouter>
+//           <Route path="/feed">
+//             {/* <Feed /> */}
+//           </Route>
+//           <Route path="/profile">
+//             {/* <Profile /> */}
+//           </Route>
+//       </BrowserRouter>
+//     </div>
+//   );
+// }
+// }
+
+// export default App;
