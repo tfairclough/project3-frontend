@@ -1,16 +1,12 @@
 .hero-image {
-<<<<<<< HEAD
     display: flex;
     justify-content: center;
-=======
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
     width: 100vw;
     height: 600px;
     background-image: url('./assets/loginHeader.png');
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: inset 0 0 0 1000px rgba(206, 3, 247, 0.356);
-<<<<<<< HEAD
     position: relative;
     text-align: center;
 }
@@ -23,21 +19,12 @@
     bottom: 0;
     margin-bottom: -41px;
     color: rgb(2, 2, 155);
-=======
-}
-
-.hero-h1 {
-    font-size: 120px;
-    margin: 0;
-    padding: 0;
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
 }
 
 .hidden {
     display: none;
 }
 
-<<<<<<< HEAD
 .login-wrapper {
     display: flex;
     justify-content: center;
@@ -47,18 +34,6 @@
     text-align: center;
     position: relative;
     padding-top: 70px;
-=======
-.login-register-wrapper{
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-}
-
-.login-wrapper {
-    width: 100%;
-    text-align: center;
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
 }
 
 .not-member {
@@ -71,7 +46,6 @@
     top: 0;
     right: 0;
 }
-<<<<<<< HEAD
 
 .login-register-input {
     width: 250px;
@@ -119,5 +93,3 @@ input:focus {
     text-decoration: underline;
     color: blue;
 }
-=======
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
