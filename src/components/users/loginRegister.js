@@ -87,10 +87,7 @@ export default class Login extends React.Component {
     });
   };
 
-      
-
-
-      
+    
   handleCheckUsername = (e) => {
     const userName = {
       user: {
