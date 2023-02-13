@@ -7,8 +7,7 @@ class Search extends React.Component{
 
         this.state = {
             searchValue: '',
-            //this is already being passed down from app - will also need to pass down currentUser
-            name: [], 
+            name: '', 
             friends: [],
             newUserValue: ''
           }
@@ -17,11 +16,11 @@ class Search extends React.Component{
    // takes input and matches it to api users
    // backend is where we filter input to match db
     handleSearchChange = (e) => {
-        const textValue = e.target.value;
-        const userDetails = {
-            name: this.state.name
-        };
-        console.log('Showing user details:', (userDetails))
+        const userDetails = 
+         this.state.name
+    
+        console.log(this.state.name)
+        getSearchedUsers(userDetails)
         .then((response) => {
         console.log(response)
         })
@@ -29,10 +28,10 @@ class Search extends React.Component{
             console.error(error);
         });
         //allow user to input text
-            this.setState({
-            searchValue: textValue
-        })
-    getSearchedUsers()
+         /*    this.setState({
+            searchValue: e.target.value
+        }) */
+    
   }
 
    /* handleFriendsSubmit = (e) => {
