@@ -1,4 +1,4 @@
-
+import { getSearchedUsers } from '././api'
 import React from 'react';
 
 class Search extends Component {
@@ -16,8 +16,10 @@ class Search extends Component {
     }
 
 render() {
+
     //takes input and matches it to api users
-    handleSearchChange = (e) => {
+    // this goes to the backend
+/*     handleSearchChange = (e) => {
         const textValue = e.target.value;
         const filteredUsersList = this.state.users.filter(function(user){
             //need to search for users by firstName lastName or username
@@ -28,9 +30,27 @@ render() {
         searchValue: textValue,
         filteredUsers: filteredUsersList 
     })
-  }
+  } */
 
-  // create a map for 
+  handleFriendsSubmit = (e) => {
+    e.preventDefault();
+    // forms the body to send to backend
+    const userDetails = {
+      user: {
+        userName: this.state.userName
+      }
+    };
+    console.log('Sending user details:', (userDetails));
+    loginUser(userDetails)
+  .then((response) => {
+   getSearchedUsers(this.state.filteredUsers)
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+  };
+
 
   /* // adds user's choices to friends state 
         addToFriends = (user) => {
@@ -44,12 +64,13 @@ render() {
                 <label>Search for friends</label>
                 <input type = 'text'
                         placeholder = "Search for friends"
-                        /* value = {this.value}
-                        onChange = {this.handleSearchChange} *//>
-                {/* <button onClick = {this.addToFriends}>Add to Friends List</button>  */}
+                         value = {this.value}
+                        onChange = {e => this.setState({ filteredUsers: [...this.state.filteredUsers, e.target.value]})} />
+                <button type='submit' onSubmit={this.handleFriendsSubmit}>Add to Friends List</button> 
             </div>
         )
         }
     }
     
     export default Search;
+

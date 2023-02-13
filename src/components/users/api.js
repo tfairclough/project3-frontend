@@ -18,5 +18,10 @@ export const createNewUser = (userDetails) => {
 export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
 
+// api to get all searched users
+export const getSearchedUsers = () => {
+    return axios.get(`${apiUrl}/search`)
+}
+
     
       
