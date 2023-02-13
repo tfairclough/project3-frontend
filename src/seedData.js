@@ -5,7 +5,7 @@
         lastName: "Langley",
         userName: "Eddy85",
         password: "1"
-    }, {
+    }, { 
         firstName: "Deja",
         lastName: "Gorden",
         userName: "TheCaliforniaCoder",
