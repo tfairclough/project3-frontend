@@ -4,7 +4,7 @@ import { createNewUser } from './api'
 import { userSeedData } from '../../seedData'
 import { registerAllUsers } from './api'
 import { loginUser } from './api'
-import { compareUsername } from './api'
+/* import { compareUsername } from './api' */
 import './../../loginRegister.css'
 
 export default class Login extends React.Component {
@@ -94,7 +94,7 @@ export default class Login extends React.Component {
         userName: this.state.userName,
       }
     }
-    compareUsername(userName)
+    /* compareUsername(userName) */
     console.log(userName)
     .then((res) => {
       if (res.status === 201) {
