@@ -89,7 +89,7 @@ export default class App extends React.Component {
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed"/> 
           <Route path = "/profile"/> 
-          <Route path = "/search"/>
+          <Route path = "/search" component={Search}/>
   
 
         </>

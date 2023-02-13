@@ -21,7 +21,7 @@ class Search extends React.Component{
         const userDetails = {
             name: this.state.name
         };
-        console.log('Sending user details:', (userDetails))
+        console.log('Showing user details:', (userDetails))
         .then((response) => {
         console.log(response)
         })
@@ -42,9 +42,6 @@ class Search extends React.Component{
   }; */
 
 render() {
-
-
-
         return (
             <div>
                 <label>Search for friends</label>
