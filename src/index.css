@@ -7,13 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   max-width: 100vw;
   max-height: 100vh;
-<<<<<<< HEAD
 }
 
 html, body, #app, #app>div {
   height: 100%
-=======
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
 }
 
 code {

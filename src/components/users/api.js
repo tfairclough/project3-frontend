@@ -17,13 +17,13 @@ export const createNewUser = (userDetails) => {
 // api to create seed users
 export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
-<<<<<<< HEAD
     
 // api to check username
 export const compareUsername = (userDetails) => {
     return axios.post(`${apiUrl}/users`, userDetails)} 
-=======
-
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
     
       
+// api to get all searched users
+export const getSearchedUsers = (name) => {
+    return axios.get(`${apiUrl}/search`, name)
+}
