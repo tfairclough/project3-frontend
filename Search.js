@@ -16,8 +16,10 @@ class Search extends Component {
     }
 
 render() {
+
     //takes input and matches it to api users
-    handleSearchChange = (e) => {
+    // this goes to the backend
+/*     handleSearchChange = (e) => {
         const textValue = e.target.value;
         const filteredUsersList = this.state.users.filter(function(user){
             //need to search for users by firstName lastName or username
@@ -28,9 +30,30 @@ render() {
         searchValue: textValue,
         filteredUsers: filteredUsersList 
     })
-  }
+  } */
 
-  // create a map for 
+  handleFriendsSubmit = (e) => {
+    e.preventDefault();
+    // forms the body to send to backend
+    const userDetails = {
+      user: {
+        userName: this.state.userName
+      }
+    };
+    console.log('Sending user details:', (userDetails));
+    loginUser(userDetails)
+  .then((response) => {
+    // sets token and updates URL after login
+   /*  const token = response.data.token;
+    this.props.setToken(token);
+    window.history.pushState({}, 'Feed', '/feed'); */
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+  };
+
 
   /* // adds user's choices to friends state 
         addToFriends = (user) => {
@@ -44,8 +67,8 @@ render() {
                 <label>Search for friends</label>
                 <input type = 'text'
                         placeholder = "Search for friends"
-                        /* value = {this.value}
-                        onChange = {this.handleSearchChange} *//>
+                         value = {this.value}
+                        onChange = {e => this.setState({ friends: [...this.state.friends, e.target.value] })} />
                 {/* <button onClick = {this.addToFriends}>Add to Friends List</button>  */}
             </div>
         )

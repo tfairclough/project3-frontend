@@ -9,43 +9,32 @@ import {
 export default class App extends React.Component {
   constructor(props) {
     super(props)
- this.state = {
+     // Retrieve token from local storage
+     const getToken = () => {
+      const tokenString = localStorage.getItem('token');
+      console.log('tokenString: ', tokenString);
+      
+      return tokenString || '';
+  };
+
+  this.state = {
+    token: getToken(),
     currentUser: {
-      firstName,
-      lastName,
-      userName,
-      hashedPassword,
-      email,
-      location,
-      friends,
-      posts,
-      img,
-      timestamps
+      firstName: 'test',
+      lastName: 'test',
+      userName: 'test',
+      password: 'test',
+      email: 'test',
+      location: 'test',
+      friends: ['test'],
+      img: 'test',
+      timestamps: 'test'
     }
-  }
+  };
+}
 
-    // Retrieve token from local storage
-    const getToken = () => {
-        const tokenString = localStorage.getItem('token');
-        console.log('tokenString: ', tokenString);
-        return tokenString || '';
-    };
 
-    this.state = {
-      token: getToken(),
-      currentUser: {
-        firstName: 'test',
-        lastName: 'test',
-        userName: 'test',
-        password: 'test',
-        email: 'test',
-        location: 'test',
-        friends: ['test'],
-        img: 'test',
-        timestamps: 'test'
-      }
-    };
-  }
+   
 
   // Removes token from local storage and sets URL to /login 
   logout = () => {
@@ -104,7 +93,8 @@ export default class App extends React.Component {
     )
     }
   }
-} 
+}
+
 
 // Alternative code to use functional components 
 // import useToken from './useToken';
