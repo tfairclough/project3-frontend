@@ -17,6 +17,9 @@ export const createNewUser = (userDetails) => {
 // api to create seed users
 export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
-
+    
+// api to check username
+export const compareUsername = (userDetails) => {
+    return axios.post(`${apiUrl}/users`, userDetails)} 
     
       
