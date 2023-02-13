@@ -18,24 +18,22 @@ export default class App extends React.Component {
       return tokenString || '';
   };
 
-  this.state = {
-    token: getToken(),
-    currentUser: {
-      firstName: 'test',
-      lastName: 'test',
-      userName: 'test',
-      password: 'test',
-      email: 'test',
-      location: 'test',
-      friends: ['test'],
-      img: 'test',
-      timestamps: 'test'
-    }
-  };
-}
-
-
-   
+    this.state = {
+      token: getToken(),
+      currentUser: {
+        firstName: '',
+        lastName: '',
+        userName: '',
+        // password: '',
+        // email: '',
+        // location: '',
+        friends: [''],
+        // posts: [''],
+        // img: '',
+        // timestamps: ''
+      }
+    };
+  }
 
   // Removes token from local storage and sets URL to /login 
   logout = () => {
@@ -55,6 +53,14 @@ export default class App extends React.Component {
     })
   }
 
+  setCurrentUser = (currentUser) => {
+    this.setState({ currentUser })
+  }
+
+  setCurrentUser = (currentUser) => {
+    this.setState({ currentUser })
+  }
+
   // Saves token to local storage
   saveToken = (userToken) => {
     localStorage.setItem('token', userToken);
@@ -68,7 +74,8 @@ export default class App extends React.Component {
 
     // Checks if a token exists if not the login page is loaded
     if (!token) {
-      return <Login setToken={this.saveToken} />;
+      return <Login setToken={this.saveToken} 
+      setCurrentUser={this.setCurrentUser}/>;
     } else {
 
     return(

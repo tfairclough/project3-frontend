@@ -4,14 +4,20 @@ import { createNewUser } from './api'
 import { userSeedData } from '../../seedData'
 import { registerAllUsers } from './api'
 import { loginUser } from './api'
+import { compareUsername } from './api'
+import './../../loginRegister.css'
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dummyUsers: userSeedData,
+      firstName: '',
+      lastName: '',
+      email: '',
       userName: '',
       password: '',
+      confirmPassword: '',
       isLoginForm: true,
     };
   }
@@ -53,56 +59,125 @@ export default class Login extends React.Component {
     };
     console.log('Sending credentials:', (credentials));
     loginUser(credentials)
-  .then((response) => {
-    // sets token and updates URL after login
-    const token = response.data.token;
-    this.props.setToken(token);
-    window.history.pushState({}, 'Feed', '/feed');
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
+    .then((response) => {
+      console.log(response)
+      // sets token and updates URL after login
+      const token = response.data.token;
+      const firstName = response.data.userDetails.firstName;
+      const lastName = response.data.userDetails.lastName;
+      const userName = response.data.userDetails.userName;
+      // const location = response.data.userDetails.location;
+      const friends = response.data.userDetails.friends;
+      // const posts = response.data.userDetails.posts
+      const currentUser = {
+          firstName,
+          lastName,
+          userName,
+          // location,
+          friends,
+          // posts
+        }
+      
+      this.props.setToken(token);
+      this.props.setCurrentUser(currentUser)
+      window.history.pushState({}, 'Feed', '/feed');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
+
+    
+  handleCheckUsername = (e) => {
+    const userName = {
+      user: {
+        userName: this.state.userName,
+      }
+    }
+    compareUsername(userName)
+    console.log(userName)
+    .then((res) => {
+      if (res.status === 201) {
+        console.log('select a new username')
+      } else {
+        console.log('username good')
+      }
+    })
+  }
+
+  handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.password !== this.state.confirmPassword) {
+
+    } else {
+
+    }
+  }
 
   render() {
     return (
       <>
         {/* login/register page header section */}
         <header className='hero-image'>
-          <h1 className="hero-h1">App Name</h1>
+          <h1 className="hero-h1">Naptser Social</h1>
+          <button onClick={this.addDummyUsers} className="tmp-add-users">add seed users</button>
+
         </header>
         <div className='login-wrapper'>
           {/* If state isLoginForm = true then login form is displayed */}
           {this.state.isLoginForm ? (
             <>
-              <button onClick={this.addDummyUsers} className="tmp-add-users">add seed users</button>
-              <p className='not-member'>Not a member? <button onClick={this.handleFormToggle}>Sign up now</button></p>
+              <div className='signup-signin'>
+                <p className='not-member'>Not a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign up now</button></p>
+              </div>
               <form className='login-form' onSubmit={this.handleLoginSubmit}>
-                <input
+                <input className='login-register-input'
                   type="text"
                   placeholder="Username..."
                   onChange={e => this.setState({userName: e.target.value})} /><br />
-                <input
+                <input className='login-register-input'
                   type="password"
                   placeholder="Password..."
-                  onChange={e => this.setState({password: e.target.value})} /><br />
-                <button type='submit'>Login</button>
+                  onChange={e =>  this.setState({password: e.target.value})} /><br />
+                <button className='login-register-buttons' type='submit'>Login</button>
               </form>
             </>
             // if state isLoginForm = false then register form is displayed
           ) : (
             <>
-              <p className='not-member'>Already a member? <button onClick={this.handleFormToggle}>Sign in</button></p>
+              <div className='signup-signin'>
+                <p className='not-member'>Already a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign in</button></p>
+              </div>
               <div className='register-wrapper'>
                 <form>
-                  <input type="text" placeholder="First name..." />
-                  <input type="text" placeholder="Last name..." /><br />
-                  <input type="text" placeholder="Username..." />
-                  <input type="email" placeholder="Email..." /><br />
-                  <input type="password" placeholder="Password..." />
-                  <input type="password" placeholder="Confirm password..." /><br />
-                  <button onClick={this.createNewUser}>Register</button>
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="First name..."
+                         onChange={e => this.setState({firstName: e.target.value})} />
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="Last name..."
+                         onChange={e => this.setState({lastName: e.target.value})} /><br />
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="Username..."
+                         onChange={e => {
+                          this.setState({userName: e.target.value})
+                          this.handleCheckUsername()
+                         }} />
+                  <input className='login-register-input' 
+                         type="email" 
+                         placeholder="Email..."
+                         onChange={e => this.setState({email: e.target.value})} /><br />
+                  <input className='login-register-input' 
+                         type="password" 
+                         placeholder="Password..."
+                         onChange={e => this.setState({password: e.target.value})} />
+                  <input className='login-register-input' 
+                         type="password" 
+                         placeholder="Confirm password..."
+                         onChange={e => this.setState({confirmPassword: e.target.value})} /><br />
+                  <button className='login-register-buttons' onClick={this.createNewUser}>Register</button>
                 </form>
               </div>
             </>
