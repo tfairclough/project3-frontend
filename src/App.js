@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom' 
+import Search from './components/Search'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -79,6 +80,7 @@ export default class App extends React.Component {
           <nav>
             <Link to = "/feed">Feed</Link>
             <Link to = "/profile">Profile</Link>
+            <Link to = "/search">Search</Link>
 
             {/* Logout button */}
             <button onClick={this.logout}>Logout</button>
@@ -87,6 +89,8 @@ export default class App extends React.Component {
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed"/> 
           <Route path = "/profile"/> 
+          <Route path = "/search"/>
+  
 
         </>
       </Router>
