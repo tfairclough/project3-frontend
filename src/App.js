@@ -52,13 +52,10 @@ export default class App extends React.Component {
     })
   }
 
-<<<<<<< HEAD
   setCurrentUser = (currentUser) => {
     this.setState({ currentUser })
   }
 
-=======
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
   // Saves token to local storage
   saveToken = (userToken) => {
     localStorage.setItem('token', userToken);
@@ -72,12 +69,8 @@ export default class App extends React.Component {
 
     // Checks if a token exists if not the login page is loaded
     if (!token) {
-<<<<<<< HEAD
       return <Login setToken={this.saveToken} 
       setCurrentUser={this.setCurrentUser}/>;
-=======
-      return <Login setToken={this.saveToken} />;
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
     } else {
 
     return(
