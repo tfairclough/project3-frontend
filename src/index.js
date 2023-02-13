@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-<<<<<<< HEAD
 // import './loginRegister.css'
-=======
-import './loginRegister.css'
->>>>>>> 2edc84f92406297f46b36b9732c0ea5286ac78dc
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
