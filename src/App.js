@@ -56,6 +56,10 @@ export default class App extends React.Component {
     this.setState({ currentUser })
   }
 
+  setCurrentUser = (currentUser) => {
+    this.setState({ currentUser })
+  }
+
   // Saves token to local storage
   saveToken = (userToken) => {
     localStorage.setItem('token', userToken);
