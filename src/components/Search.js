@@ -6,32 +6,27 @@ class Search extends React.Component{
         super(props);
 
         this.state = {
-            searchValue: '',
-            name: '', 
+            searchValue: '', 
             friends: [],
-            newUserValue: ''
+            searchResults:[]
           }
 
     }
    // takes input and matches it to api users
    // backend is where we filter input to match db
     handleSearchChange = (e) => {
-        const userDetails = 
-         this.state.name
-    
-        console.log(this.state.name)
-        getSearchedUsers(userDetails)
+        const textValue = e.target.value
+        console.log(textValue)
+        getSearchedUsers(textValue)
         .then((response) => {
         console.log(response)
         })
         .catch((error) => {
             console.error(error);
         });
-        //allow user to input text
-         /*    this.setState({
-            searchValue: e.target.value
-        }) */
-    
+        this.setState({
+            searchValue: textValue
+        })
   }
 
    /* handleFriendsSubmit = (e) => {
@@ -44,13 +39,12 @@ render() {
         return (
             <div>
                 <label>Search for friends</label>
-                <input type = 'text'
+                <input type = 'search'
                         placeholder = "Search for friends"
-                        value = {this.value}
-                        onChange = {(e) => {
-                            this.setState({name: e.target.value})
-                            this.handleSearchChange()
-                        } } />
+                        value = {this.state.searchValue}
+                        onChange = {this.handleSearchChange}
+                        
+                         />
                {/*  <button type='submit' onSubmit={this.handleFriendsSubmit}>Add to Friends List</button>  */}
             </div>
         )

@@ -19,10 +19,9 @@ export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
 
 // api to get all searched users
-export const getSearchedUsers = (userDetails) => {
-    console.log(userDetails)
+export const getSearchedUsers = (name) => {
 
-    return axios.get(`${apiUrl}/search`, {data: userDetails})
+    return axios.get(`${apiUrl}/search/${name}`)
 }
 
     
