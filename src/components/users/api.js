@@ -11,8 +11,8 @@ export const getAllUsers = () => {
     return axios.get(`${apiUrl}/users`)
 }  
 // api to create a user
-export const createNewUser = (userDetails) => {
-    return axios.post(`${apiUrl}/register`, userDetails)} 
+export const createNewUser = (newUser) => {
+    return axios.post(`${apiUrl}/register`, newUser)} 
 
 // api to create seed users
 export const registerAllUsers = (userDetails) => {
