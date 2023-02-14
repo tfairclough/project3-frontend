@@ -37,6 +37,10 @@ class Search extends React.Component{
 
 render() {
         return (
+            /* map searchedResults*/
+           /*  const usersArray = this.state.searchResults.map((item, index) => {
+                return this.props.currentUser
+            }) */
             <div>
                 <label>Search for friends</label>
                 <input type = 'search'
