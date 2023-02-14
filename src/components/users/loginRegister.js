@@ -11,6 +11,7 @@ export default class Login extends React.Component {
     super(props);
     this.state = {
       dummyUsers: userSeedData,
+      id: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -93,8 +94,10 @@ export default class Login extends React.Component {
       const userName = response.data.userDetails.userName;
       const location = response.data.userDetails.location;
       const friends = response.data.userDetails.friends;
-      const posts = response.data.userDetails.posts
+      const posts = response.data.userDetails.posts;
+      const id = response.data.userDetails._id;
       const currentUser = {
+          id,
           firstName,
           lastName,
           userName,
