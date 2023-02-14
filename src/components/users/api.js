@@ -27,3 +27,9 @@ export const compareUsername = (userDetails) => {
 export const getSearchedUsers = (name) => {
     return axios.get(`${apiUrl}/search/${name}`)
 }
+
+// api call to update current users friends
+
+export const addFriends = (id, user) => {
+    return axios.put(`${apiUrl}/addfriend/${id}`, user)
+}

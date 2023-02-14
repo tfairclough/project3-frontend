@@ -11,17 +11,20 @@ class Results extends Component{
    }
 
     render () {
-        return (
-            //map here
-           <div>
-             <div>
-                <h3>First name: {this.props.firstName}</h3>
-                <h3>Last name: {this.props.lastName}</h3>
-                <h3>Username: {this.props.userName}</h3>
-            </div>
-            <div>
+         /* map searchedResults*/
+     const usersArray = this.props.searchResults.map((item, index) => {
+        return  <div key={index}>
+                <h3>First name: {item.firstName}</h3>
+                <h3>Last name: {item.lastName}</h3>
+                <h3>Username: {item.userName}</h3>
+                <div>
                 <button onClick={this.onClick}>Add to friends</button>
             </div>
+                 </div>
+    })
+        return (
+           <div>
+            {usersArray}
            </div>
         )
     }

@@ -8,7 +8,6 @@ class Search extends React.Component{
 
         this.state = {
             searchValue: '', 
-            friends: [],
             searchResults:[]
           }
     }
@@ -32,11 +31,9 @@ class Search extends React.Component{
         })
   }
 
-   /* addToFriends = (user) => {
-        this.setState({
-            friends: [...this.state.friends, user]
-        })
-  }; */
+   addToFriends = (user) => {
+        
+  }; 
 
 render() {
         return (
@@ -47,7 +44,8 @@ render() {
                         value = {this.state.searchValue}
                         onChange = {this.handleSearchChange}
                          />
-                <Results />
+                <Results searchResults={this.state.searchResults}
+                         addToFriends={this.addToFriends}/>
                {/*  <button type='submit' onSubmit={this.handleFriendsSubmit}>Add to Friends List</button>  */}
             </div>
         )
