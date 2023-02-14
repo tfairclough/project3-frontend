@@ -27,3 +27,7 @@ export const compareUsername = (userDetails) => {
 export const getSearchedUsers = (name) => {
     return axios.get(`${apiUrl}/search`, name)
 }
+
+// // Placeholder API for retrieving friends
+// export const getUserFriends = (user) => {
+//   return axios.get((`${apiUrl}/users:id`, name)}
