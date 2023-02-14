@@ -11,13 +11,16 @@ export const getAllUsers = () => {
     return axios.get(`${apiUrl}/users`)
 }  
 // api to create a user
-export const createNewUser = (userDetails) => {
-    return axios.post(`${apiUrl}/register`, userDetails)} 
+export const createNewUser = (newUser) => {
+    return axios.post(`${apiUrl}/register`, newUser)} 
 
 // api to create seed users
 export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
-
+    
+// api to check username
+export const compareUsername = (userDetails) => {
+    return axios.post(`${apiUrl}/users`, userDetails)} 
     
 // api to find all posts
 export const findPosts = () => {
@@ -29,3 +32,8 @@ export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})
 }   
 
+      
+// api to get all searched users
+export const getSearchedUsers = (name) => {
+    return axios.get(`${apiUrl}/search`, name)
+}

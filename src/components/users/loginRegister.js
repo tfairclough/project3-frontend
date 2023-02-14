@@ -4,14 +4,20 @@ import { createNewUser } from './api'
 import { userSeedData } from '../../seedData'
 import { registerAllUsers } from './api'
 import { loginUser } from './api'
+import './../../loginRegister.css'
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dummyUsers: userSeedData,
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
       userName: '',
       password: '',
+      location: '',
       isLoginForm: true,
     };
   }
@@ -22,13 +28,12 @@ export default class Login extends React.Component {
     console.log('button working')
     // call the create a users api that we imported from api.js and pass the createUser state
     registerAllUsers(this.state.dummyUsers)
-      .then(() => {
-        console.log('user created')
-      })
-      .catch((err) => {
-          console.log(err)
-      })
-
+    .then(() => {
+      console.log('user created')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
   }
 
   // Switches between login and register forms and updates the URL
@@ -39,6 +44,33 @@ export default class Login extends React.Component {
       const pageTitle = this.state.isLoginForm ? 'Login' : 'Register';
       window.history.pushState({}, pageTitle, `/${pageTitle.toLowerCase()}`);
     });
+  }
+
+  // register method
+  handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    // forms the body to send to backend
+    const newUser = {
+      user: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        userName: this.state.userName,
+        password: this.state.password,
+        email: this.state.email,
+        location: this.state.location
+      }
+    };
+    console.log('sending new user:', newUser);
+    // calls the createnewuser api from api.js
+    createNewUser(newUser)
+    .then((res) => {
+      console.log(res)
+      // once the user has been registered it calls the login method
+      this.handleLoginSubmit(e)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   // Login method
@@ -53,16 +85,33 @@ export default class Login extends React.Component {
     };
     console.log('Sending credentials:', (credentials));
     loginUser(credentials)
-  .then((response) => {
-    // sets token and updates URL after login
-    const token = response.data.token;
-    this.props.setToken(token);
-    window.history.pushState({}, 'Feed', '/feed');
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
+    .then((response) => {
+      console.log(response)
+      // sets token and updates URL after login
+      const token = response.data.token;
+      const firstName = response.data.userDetails.firstName;
+      const lastName = response.data.userDetails.lastName;
+      const userName = response.data.userDetails.userName;
+      const location = response.data.userDetails.location;
+      const friends = response.data.userDetails.friends;
+      const posts = response.data.userDetails.posts;
+      const id = response.data.userDetails._id;
+      const currentUser = {
+          id,
+          firstName,
+          lastName,
+          userName,
+          location,
+          friends,
+          posts,
+        }
+      this.props.setToken(token);
+      this.props.setCurrentUser(currentUser)
+      window.history.pushState({}, 'Feed', '/feed');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
 
   render() {
@@ -70,39 +119,62 @@ export default class Login extends React.Component {
       <>
         {/* login/register page header section */}
         <header className='hero-image'>
-          <h1 className="hero-h1">App Name</h1>
+          <h1 className="hero-h1">Naptser Social</h1>
+          <button onClick={this.addDummyUsers} className="tmp-add-users">add seed users</button>
+
         </header>
         <div className='login-wrapper'>
           {/* If state isLoginForm = true then login form is displayed */}
           {this.state.isLoginForm ? (
             <>
-              <button onClick={this.addDummyUsers} className="tmp-add-users">add seed users</button>
-              <p className='not-member'>Not a member? <button onClick={this.handleFormToggle}>Sign up now</button></p>
+              <div className='signup-signin'>
+                <p className='not-member'>Not a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign up now</button></p>
+              </div>
               <form className='login-form' onSubmit={this.handleLoginSubmit}>
-                <input
+                <input className='login-register-input'
                   type="text"
                   placeholder="Username..."
                   onChange={e => this.setState({userName: e.target.value})} /><br />
-                <input
+                <input className='login-register-input'
                   type="password"
                   placeholder="Password..."
-                  onChange={e => this.setState({password: e.target.value})} /><br />
-                <button type='submit'>Login</button>
+                  onChange={e =>  this.setState({password: e.target.value})} /><br />
+                <button className='login-register-buttons' type='submit'>Login</button>
               </form>
             </>
             // if state isLoginForm = false then register form is displayed
           ) : (
             <>
-              <p className='not-member'>Already a member? <button onClick={this.handleFormToggle}>Sign in</button></p>
+              <div className='signup-signin'>
+                <p className='not-member'>Already a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign in</button></p>
+              </div>
               <div className='register-wrapper'>
-                <form>
-                  <input type="text" placeholder="First name..." />
-                  <input type="text" placeholder="Last name..." /><br />
-                  <input type="text" placeholder="Username..." />
-                  <input type="email" placeholder="Email..." /><br />
-                  <input type="password" placeholder="Password..." />
-                  <input type="password" placeholder="Confirm password..." /><br />
-                  <button onClick={this.createNewUser}>Register</button>
+                <form onSubmit={this.handleRegisterSubmit}>
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="First name..."
+                         onChange={e => this.setState({firstName: e.target.value})} />
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="Last name..."
+                         onChange={e => this.setState({lastName: e.target.value})} /><br />
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="Location..."
+                         onChange={e => this.setState({location: e.target.value})} />
+                  <input className='login-register-input' 
+                         type="email" 
+                         placeholder="Email..."
+                         onChange={e => this.setState({email: e.target.value})} /><br />
+                  <input className='login-register-input' 
+                         type="text" 
+                         placeholder="Username..."
+                         onChange={e => this.setState({userName: e.target.value})} />
+                  <input className='login-register-input' 
+                         type="password" 
+                         placeholder="Password..."
+                         onChange={e => this.setState({password: e.target.value})} /><br />
+                  <button type='submit' className='login-register-buttons' >Register</button>
                 </form>
               </div>
             </>

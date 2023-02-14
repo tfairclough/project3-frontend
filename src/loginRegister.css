@@ -1,32 +1,39 @@
 .hero-image {
+    display: flex;
+    justify-content: center;
     width: 100vw;
     height: 600px;
     background-image: url('./assets/loginHeader.png');
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: inset 0 0 0 1000px rgba(206, 3, 247, 0.356);
+    position: relative;
+    text-align: center;
 }
 
 .hero-h1 {
-    font-size: 120px;
+    font-size: 170px;
     margin: 0;
     padding: 0;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -41px;
+    color: rgb(2, 2, 155);
 }
 
 .hidden {
     display: none;
 }
 
-.login-register-wrapper{
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-}
-
 .login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    min-height: 100%;
     text-align: center;
+    position: relative;
+    padding-top: 70px;
 }
 
 .not-member {
@@ -38,4 +45,51 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.login-register-input {
+    width: 250px;
+    height: 40px;
+    padding-left: 15px;
+    margin: 5px;
+    border: solid 1px rgb(206, 3, 247);
+}
+
+input:focus {
+    outline:none;
+}
+
+.login-register-buttons {
+    width: 270px;
+    height: 45px;
+    margin: 5px;
+    border: solid 1px rgb(206, 3, 247);
+    background-color: #fff;
+    color:  rgb(206, 3, 247);
+    font-weight: bold;
+}
+
+.login-register-buttons:hover {
+    width: 270px;
+    height: 45px;
+    margin: 5px;
+    border: solid 1px rgb(206, 3, 247);
+    background-color: rgb(206, 3, 247);
+    color:  #fff;
+    font-weight: bold;
+}
+
+.signup-signin {
+    position: absolute;
+    width: 200px;
+    top: 0;
+    right: 0;
+    margin-right: 15px;
+}
+
+.signup-signin-button {
+    border: none;
+    background-color: #fff;
+    text-decoration: underline;
+    color: blue;
 }
