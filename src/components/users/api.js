@@ -22,6 +22,16 @@ export const registerAllUsers = (userDetails) => {
 export const compareUsername = (userDetails) => {
     return axios.post(`${apiUrl}/users`, userDetails)} 
     
+// api to find all posts
+export const findPosts = () => {
+    return axios.get(`${apiUrl}/posts`)
+}
+
+// api to edit post
+export const editPost = (postId, updatedContent) => {
+    return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})
+}   
+
       
 // api to get all searched users
 export const getSearchedUsers = (name) => {
