@@ -18,5 +18,13 @@ export const createNewUser = (newUser) => {
 export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
     
+// api to check username
+export const compareUsername = (userDetails) => {
+    return axios.post(`${apiUrl}/users`, userDetails)} 
     
-    
+      
+// api to get all searched users
+export const getSearchedUsers = (name) => {
+    console.log(userDetails)
+    return axios.get(`${apiUrl}/search`, name)
+}
