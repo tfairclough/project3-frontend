@@ -20,15 +20,13 @@ export default class App extends React.Component {
     this.state = {
       token: getToken(),
       currentUser: {
-        firstName: 'firstName',
-        lastName: 'lastName',
+        firstName: '',
+        lastName: '',
         userName: '',
         // password: '',
         // email: '',
         // location: '',
-        friends: [{firstName: 'friendFirstName',
-                  lastName: 'friendLastName',
-                  }],
+        friends: [],
         // posts: [''],
         // img: '',
         // timestamps: ''
@@ -52,10 +50,6 @@ export default class App extends React.Component {
     this.setState({
       users: users,
     })
-  }
-
-  setCurrentUser = (currentUser) => {
-    this.setState({ currentUser })
   }
 
   setCurrentUser = (currentUser) => {

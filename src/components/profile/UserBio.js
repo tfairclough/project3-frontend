@@ -8,9 +8,11 @@ const UserBio = (props) => {
     <div>
       <img src={profilePic}/>
       <img className='pencil-icon' src={EditIcon} onClick={props.editCountryDetails} width={50}/>
-      <p>{props.currentUser.firstName}</p>
-      <p>{props.currentUser.lastName}</p>
-      <p>{props.currentUser.email}</p>
+      <p>FirstName: {props.currentUser.firstName}</p>
+      <p>LastName: {props.currentUser.lastName}</p>
+      <p>UserName: {props.currentUser.userName}</p>
+      <p>Email: {props.currentUser.email}</p>
+      <p>Location: {props.currentUser.location}</p>
     </div>
   )
 }

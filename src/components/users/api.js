@@ -28,6 +28,10 @@ export const getSearchedUsers = (name) => {
     return axios.get(`${apiUrl}/search`, name)
 }
 
+export const updateUserProfile = (id, updatedUserDetails) => {
+  return axios.put((`${apiUrl}/users/${id}`, updatedUserDetails))
+}
+
 // // Placeholder API for retrieving friends
 // export const getUserFriends = (user) => {
 //   return axios.get((`${apiUrl}/users:id`, name)}
