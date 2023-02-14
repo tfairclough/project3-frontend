@@ -25,5 +25,5 @@ export const compareUsername = (userDetails) => {
       
 // api to get all searched users
 export const getSearchedUsers = (name) => {
-    return axios.get(`${apiUrl}/search`, name)
+    return axios.get(`${apiUrl}/search/${name}`)
 }
