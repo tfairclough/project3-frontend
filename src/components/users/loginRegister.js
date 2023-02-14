@@ -4,7 +4,6 @@ import { createNewUser } from './api'
 import { userSeedData } from '../../seedData'
 import { registerAllUsers } from './api'
 import { loginUser } from './api'
-import { compareUsername } from './api'
 import './../../loginRegister.css'
 
 export default class Login extends React.Component {
@@ -17,7 +16,7 @@ export default class Login extends React.Component {
       email: '',
       userName: '',
       password: '',
-      confirmPassword: '',
+      location: '',
       isLoginForm: true,
     };
   }
@@ -28,13 +27,12 @@ export default class Login extends React.Component {
     console.log('button working')
     // call the create a users api that we imported from api.js and pass the createUser state
     registerAllUsers(this.state.dummyUsers)
-      .then(() => {
-        console.log('user created')
-      })
-      .catch((err) => {
-          console.log(err)
-      })
-
+    .then(() => {
+      console.log('user created')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
   }
 
   // Switches between login and register forms and updates the URL
@@ -45,6 +43,33 @@ export default class Login extends React.Component {
       const pageTitle = this.state.isLoginForm ? 'Login' : 'Register';
       window.history.pushState({}, pageTitle, `/${pageTitle.toLowerCase()}`);
     });
+  }
+
+  // register method
+  handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    // forms the body to send to backend
+    const newUser = {
+      user: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        userName: this.state.userName,
+        password: this.state.password,
+        email: this.state.email,
+        location: this.state.location
+      }
+    };
+    console.log('sending new user:', newUser);
+    // calls the createnewuser api from api.js
+    createNewUser(newUser)
+    .then((res) => {
+      console.log(res)
+      // once the user has been registered it calls the login method
+      this.handleLoginSubmit(e)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   // Login method
@@ -66,18 +91,17 @@ export default class Login extends React.Component {
       const firstName = response.data.userDetails.firstName;
       const lastName = response.data.userDetails.lastName;
       const userName = response.data.userDetails.userName;
-      // const location = response.data.userDetails.location;
+      const location = response.data.userDetails.location;
       const friends = response.data.userDetails.friends;
-      // const posts = response.data.userDetails.posts
+      const posts = response.data.userDetails.posts
       const currentUser = {
           firstName,
           lastName,
           userName,
-          // location,
+          location,
           friends,
-          // posts
+          posts,
         }
-      
       this.props.setToken(token);
       this.props.setCurrentUser(currentUser)
       window.history.pushState({}, 'Feed', '/feed');
@@ -86,33 +110,6 @@ export default class Login extends React.Component {
       console.error(error);
     });
   };
-
-    
-  handleCheckUsername = (e) => {
-    const userName = {
-      user: {
-        userName: this.state.userName,
-      }
-    }
-    compareUsername(userName)
-    console.log(userName)
-    .then((res) => {
-      if (res.status === 201) {
-        console.log('select a new username')
-      } else {
-        console.log('username good')
-      }
-    })
-  }
-
-  handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    if (this.state.password !== this.state.confirmPassword) {
-
-    } else {
-
-    }
-  }
 
   render() {
     return (
@@ -149,7 +146,7 @@ export default class Login extends React.Component {
                 <p className='not-member'>Already a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign in</button></p>
               </div>
               <div className='register-wrapper'>
-                <form>
+                <form onSubmit={this.handleRegisterSubmit}>
                   <input className='login-register-input' 
                          type="text" 
                          placeholder="First name..."
@@ -160,24 +157,21 @@ export default class Login extends React.Component {
                          onChange={e => this.setState({lastName: e.target.value})} /><br />
                   <input className='login-register-input' 
                          type="text" 
-                         placeholder="Username..."
-                         onChange={e => {
-                          this.setState({userName: e.target.value})
-                          this.handleCheckUsername()
-                         }} />
+                         placeholder="Location..."
+                         onChange={e => this.setState({location: e.target.value})} />
                   <input className='login-register-input' 
                          type="email" 
                          placeholder="Email..."
                          onChange={e => this.setState({email: e.target.value})} /><br />
                   <input className='login-register-input' 
-                         type="password" 
-                         placeholder="Password..."
-                         onChange={e => this.setState({password: e.target.value})} />
+                         type="text" 
+                         placeholder="Username..."
+                         onChange={e => this.setState({userName: e.target.value})} />
                   <input className='login-register-input' 
                          type="password" 
-                         placeholder="Confirm password..."
-                         onChange={e => this.setState({confirmPassword: e.target.value})} /><br />
-                  <button className='login-register-buttons' onClick={this.createNewUser}>Register</button>
+                         placeholder="Password..."
+                         onChange={e => this.setState({password: e.target.value})} /><br />
+                  <button type='submit' className='login-register-buttons' >Register</button>
                 </form>
               </div>
             </>
