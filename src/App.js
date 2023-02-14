@@ -14,7 +14,6 @@ export default class App extends React.Component {
     // Retrieve token from local storage
     const getToken = () => {
         const tokenString = localStorage.getItem('token');
-        console.log('tokenString: ', tokenString);
         return tokenString || '';
     };
 
