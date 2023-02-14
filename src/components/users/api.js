@@ -19,4 +19,7 @@ export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
 
     
-      
+// api to edit post
+export const editPost = (postBody) => {
+    return axios.patch(`${apiUrl}/posts/edit/:id`, postBody)
+}   

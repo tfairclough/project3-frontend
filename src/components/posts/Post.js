@@ -1,43 +1,39 @@
 import React, { useState } from "react";
+import { editPost } from "../users/api";
 
 const Post = () => {
   // Hook to handle the state of the post,
   // Initially edit mode is set to false, 
   const [editMode, setEditMode] = useState(false);
 
+  // Hook to manage the value of the text area
+  const [updatedPostBody, setUpdatedPostBody] = useState('Test Body');
+
   const handleEditClick = () => {
     setEditMode(!editMode);
   };
 
   const handleSaveClick = () => {
-    // Save the updated post here
+    setEditMode(false)
+  };
 
-    setIsEditing(false);
+  const handleTextareaChange = (event) => {
+    setUpdatedPostBody(event.target.value);
   };
 
   return (
     <div>
-      {isEditing ? (
+      {editMode ? (
         <div>
-          <textarea defaultValue='Test Body' />
+          <textarea value={updatedPostBody} onChange={handleTextareaChange} />
           <button onClick={handleSaveClick}>Save</button>
         </div>
       ) : (
         <div>
-          <p>Test Body</p>
+          <p>{updatedPostBody}</p>
           <button onClick={handleEditClick}>Edit</button>
         </div>
       )}
-      <div>
-        <h3>Comments</h3>
-        <ul>
-          <li>Comment1</li>
-          <li>Comment2</li>
-          <li>Comment3</li>
-          <li>Comment4</li>
-          <li>Comment5</li>          
-        </ul>
-      </div>
       <div>
         <button>Like</button>
         <p>Likes: 15</p>
