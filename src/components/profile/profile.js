@@ -1,15 +1,20 @@
 import React from 'react'
-import FriendsList from './friendsList'
+import FriendRow from './FriendRow'
+import UserBio from './UserBio'
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
+    const allFriends = this.props.currentUser.friends.map(
+      (friendDetails, index) => <FriendRow friendDetails = {friendDetails} 
+                                           key = {index}/>)
+
     return( 
       <>
-        <p>Hello</p>
-        <FriendsList currentUser={this.props.currentUser}/>
+        <UserBio currentUser={this.props.currentUser}/>
+        {allFriends}
       </>
     )
   }

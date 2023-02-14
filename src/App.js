@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from './components/users/loginRegister';
-import Profile from './components/profile/profile';
+import Profile from './components/profile/Profile';
 import {
   BrowserRouter as Router,
   Route,
@@ -20,14 +20,14 @@ export default class App extends React.Component {
     this.state = {
       token: getToken(),
       currentUser: {
-        firstName: '',
-        lastName: '',
+        firstName: 'firstName',
+        lastName: 'lastName',
         userName: '',
         // password: '',
         // email: '',
         // location: '',
-        friends: [{firstName: 'Tom',
-                  lastName: 'Fairclough',
+        friends: [{firstName: 'friendFirstName',
+                  lastName: 'friendLastName',
                   }],
         // posts: [''],
         // img: '',
