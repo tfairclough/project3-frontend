@@ -9,6 +9,10 @@ body {
   max-height: 100vh;
 }
 
+html, body, #app, #app>div {
+  height: 100%
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
