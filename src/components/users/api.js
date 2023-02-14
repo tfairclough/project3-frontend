@@ -19,7 +19,13 @@ export const registerAllUsers = (userDetails) => {
     return axios.post(`${apiUrl}/registerUsers`, userDetails)} 
 
     
+// api to find all posts
+export const findPosts = () => {
+    return axios.get(`${apiUrl}/posts`)
+}
+
 // api to edit post
-export const editPost = (postBody) => {
-    return axios.patch(`${apiUrl}/posts/edit/:id`, postBody)
+export const editPost = (postId, updatedContent) => {
+    return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})
 }   
+
