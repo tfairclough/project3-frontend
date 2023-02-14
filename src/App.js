@@ -1,5 +1,7 @@
 import React from 'react'
 import Login from './components/users/loginRegister';
+import Post from './components/posts/Post'
+import Feed from './components/Feed/Feed'
 import {
   BrowserRouter as Router,
   Route,
@@ -80,6 +82,7 @@ export default class App extends React.Component {
     return(
       <Router>
         <>
+        
           <h1>Naptser Social app</h1>
 
           {/* Nav bar links to each React Route */}
@@ -92,8 +95,8 @@ export default class App extends React.Component {
           </nav>
 
           {/* Creating the React Paths to different pages */}
-          <Route path = "/feed"/> 
           <Route path = "/profile"/> 
+          <Route path = "/feed" component={() => <Feed/>}/>                   
 
         </>
       </Router>
