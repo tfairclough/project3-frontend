@@ -3,13 +3,11 @@ import axios from "axios";
 
 // api to send login details and return a key and user details
 export const loginUser = (credentials) => {
-    return axios.post(`${apiUrl}/login`, credentials);
-  };
+    return axios.post(`${apiUrl}/login`, credentials)};
 
 // api to get all users
 export const getAllUsers = () => {
-    return axios.get(`${apiUrl}/users`)
-}  
+    return axios.get(`${apiUrl}/users`)}  
 
 // api to get a specfic user by ID
 export const getUserbyID = (userId) => {
