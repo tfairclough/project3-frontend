@@ -47,6 +47,12 @@
     right: 0;
 }
 
+.password-wrapper {
+    position: relative;
+    padding: 0px;
+    margin: 0;
+}
+
 .login-register-input {
     width: 250px;
     height: 40px;
@@ -56,7 +62,7 @@
 }
 
 input:focus {
-    outline:none;
+    outline: none;
 }
 
 .login-register-buttons {
@@ -92,4 +98,22 @@ input:focus {
     background-color: #fff;
     text-decoration: underline;
     color: blue;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.password-viewer {
+    background-color: transparent;
+    border: none;
+}
+
+.eye-icon {
+    position: absolute!important;
+    left: 10px;
+    color: rgb(206, 3, 247);
+    width: 20px;
+    height: 20px;
 }
