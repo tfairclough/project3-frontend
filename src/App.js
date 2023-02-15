@@ -71,7 +71,6 @@ export default class App extends React.Component {
   updateCurrentUserFromDatabase = (userId) => {
     getUserbyID(userId)
     .then((response) => {
-      console.log(response.data.users.location)
       this.setState({
         currentUser : {
           id: userId,
@@ -87,11 +86,12 @@ export default class App extends React.Component {
           timestamps: response.data.users.timestamps,
         }
       })
+    })
     .catch((error) => {
       console.error("Error updating User:", error);
     });
-    })
   }
+
 
 
 
