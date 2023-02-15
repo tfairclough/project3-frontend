@@ -20,7 +20,6 @@ const UserBio = (props) => {
     editUserDetails(props.currentUser.id, updatedUserDetails)
     //  
     // Need to update the user details
-    props.setCurrentUser(currentUser)
     .then(() => {
       console.log("Post saved successfully");
       setEditMode(false);

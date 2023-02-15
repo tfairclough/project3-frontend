@@ -47,8 +47,8 @@ export default class App extends React.Component {
   }
   
   // 
-  // updateCurrentUser = () => {
-
+  // updateCurrentUserData = () => {
+  
   // }
 
 
