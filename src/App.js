@@ -24,25 +24,44 @@ export default class App extends React.Component {
       token: getToken(),
       currentUser: {
         id: '',
-        firstName: 'fake',
+        firstName: '',
         lastName: '',
         userName: '',
-        // password: '',
-        // email: '',
-        // location: '',
+        email: '',
+        location: '',
         friends: [],
-        // posts: [''],
-        // img: '',
-        // timestamps: ''
+        posts: [''],
+        img: '',
+        timestamps: ''
       }
     };
+  }
+
+  componentDidMount() {
+    const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
+    if (storedCurrentUser) {
+      this.setState({ currentUser: storedCurrentUser })
+    }
   }
 
   // Removes token from local storage and sets URL to /login 
   logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
     this.setState({
-      token: ''
+      token: '',
+      currentUser: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        location: '',
+        friends: [],
+        posts: [''],
+        img: '',
+        timestamps: '',
+      }
     }, () => {
       window.history.pushState({}, 'Login', '/login');
     });
@@ -52,7 +71,6 @@ export default class App extends React.Component {
   updateCurrentUserFromDatabase = (userId) => {
     getUserbyID(userId)
     .then((response) => {
-      console.log(response.data.users.location)
       this.setState({
         currentUser : {
           id: userId,
@@ -68,11 +86,12 @@ export default class App extends React.Component {
           timestamps: response.data.users.timestamps,
         }
       })
+    })
     .catch((error) => {
       console.error("Error updating User:", error);
     });
-    })
   }
+
 
 
 
@@ -84,7 +103,9 @@ export default class App extends React.Component {
   }
 
   setCurrentUser = (currentUser) => {
-    this.setState({ currentUser })
+    this.setState({ currentUser }, () => {
+      localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser)); 
+    })
   }
 
   // Saves token to local storage
