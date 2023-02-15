@@ -19,8 +19,11 @@ export default class Login extends React.Component {
       password: '',
       location: '',
       isLoginForm: true,
+      loginErrorMessage: '',
+      registerErrorMessage: [],
+      showPassword: false,
     };
-  }
+  } 
 
   // method to add dummy users from seedData
   addDummyUsers = (e) => {
@@ -68,8 +71,9 @@ export default class Login extends React.Component {
       // once the user has been registered it calls the login method
       this.handleLoginSubmit(e)
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error);
+      this.setState({ registerErrorMessage: error.response.data.message})
     })
   }
 
@@ -111,8 +115,15 @@ export default class Login extends React.Component {
     })
     .catch((error) => {
       console.error(error);
+      this.setState({ loginErrorMessage: error.response.data.message})
     });
   };
+
+  handleToggleViewPassword = () => {
+    this.setState((prevState) => ({
+      showPassword: !prevState.showPassword,
+    }))
+  }
 
   render() {
     return (
@@ -131,14 +142,16 @@ export default class Login extends React.Component {
                 <p className='not-member'>Not a member? <button className='signup-signin-button' onClick={this.handleFormToggle}>Sign up now</button></p>
               </div>
               <form className='login-form' onSubmit={this.handleLoginSubmit}>
+                {this.state.loginErrorMessage && <div className='error-message'>* {this.state.loginErrorMessage} *</div>}
                 <input className='login-register-input'
                   type="text"
                   placeholder="Username..."
-                  onChange={e => this.setState({userName: e.target.value})} /><br />
-                <input className='login-register-input'
-                  type="password"
-                  placeholder="Password..."
-                  onChange={e =>  this.setState({password: e.target.value})} /><br />
+                  onChange={e => this.setState({userName: e.target.value})} required/><br />
+                  <input className='login-register-input'
+                    type={this.state.showPassword ? 'text' : 'password'}
+                    placeholder="Password..."
+                    onChange={e =>  this.setState({password: e.target.value})} required/>
+                <br />
                 <button className='login-register-buttons' type='submit'>Login</button>
               </form>
             </>
@@ -150,14 +163,15 @@ export default class Login extends React.Component {
               </div>
               <div className='register-wrapper'>
                 <form onSubmit={this.handleRegisterSubmit}>
+                {this.state.registerErrorMessage && <div className='error-message'>* {this.state.registerErrorMessage} *</div>}
                   <input className='login-register-input' 
                          type="text" 
                          placeholder="First name..."
-                         onChange={e => this.setState({firstName: e.target.value})} />
+                         onChange={e => this.setState({firstName: e.target.value})} required/>
                   <input className='login-register-input' 
                          type="text" 
                          placeholder="Last name..."
-                         onChange={e => this.setState({lastName: e.target.value})} /><br />
+                         onChange={e => this.setState({lastName: e.target.value})} required/><br />
                   <input className='login-register-input' 
                          type="text" 
                          placeholder="Location..."
@@ -169,7 +183,7 @@ export default class Login extends React.Component {
                   <input className='login-register-input' 
                          type="text" 
                          placeholder="Username..."
-                         onChange={e => this.setState({userName: e.target.value})} />
+                         onChange={e => this.setState({userName: e.target.value})} required/>
                   <input className='login-register-input' 
                          type="password" 
                          placeholder="Password..."
