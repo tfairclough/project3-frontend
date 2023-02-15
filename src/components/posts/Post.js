@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { editPost, addLike, findPosts } from "../users/api";
+import React, { useState } from "react";
+import { editPost, addLike } from "../users/api";
 
 const Post = ({ post }) => {
   // Hook to handle the state of the post,
@@ -8,13 +8,12 @@ const Post = ({ post }) => {
 
   // Hook to manage the value of the text area
   const [updatedPostBody, setUpdatedPostBody] = useState(post.content);
-
-
-
+  
+  // Function to set edit mode  
   const handleEditClick = () => {
     setEditMode(true)
   };
-
+  // Function that calls editPost and updates the edit post 
   const handleSaveClick = () => {
     editPost(post._id, updatedPostBody)
     .then(() => {
@@ -26,11 +25,12 @@ const Post = ({ post }) => {
     });
   };
 
+  // Function to handle the change in area 
   const handleTextareaChange = (event) => {
     setUpdatedPostBody(event.target.value);
   };
 
-
+  // Function to handle adding likes
   const handleLikeButtonClick =  (e) => {
     addLike(post._id)
   }
