@@ -1,7 +1,9 @@
 import React from 'react'
 import Login from './components/users/loginRegister';
+import Profile from './components/profile/Profile';
 import Post from './components/posts/Post'
 import Feed from './components/Feed/Feed'
+import { getUserbyID } from "./components/users/api";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,20 +17,20 @@ export default class App extends React.Component {
     // Retrieve token from local storage
     const getToken = () => {
         const tokenString = localStorage.getItem('token');
-        console.log('tokenString: ', tokenString);
         return tokenString || '';
     };
 
     this.state = {
       token: getToken(),
       currentUser: {
-        firstName: '',
+        id: '',
+        firstName: 'fake',
         lastName: '',
         userName: '',
         // password: '',
         // email: '',
         // location: '',
-        friends: [''],
+        friends: [],
         // posts: [''],
         // img: '',
         // timestamps: ''
@@ -46,16 +48,39 @@ export default class App extends React.Component {
     });
   }
   
+  
+  updateCurrentUserFromDatabase = (userId) => {
+    getUserbyID(userId)
+    .then((response) => {
+      console.log(response.data.users.location)
+      this.setState({
+        currentUser : {
+          id: userId,
+          firstName: response.data.users.firstName,
+          lastName: response.data.users.lastName,
+          userName: response.data.users.userName,
+          password: response.data.users.password,
+          email: response.data.users.email,
+          location: response.data.users.location,
+          friends: response.data.users.friends,
+          posts: response.data.users.posts,
+          img: response.data.users.img,
+          timestamps: response.data.users.timestamps,
+        }
+      })
+    .catch((error) => {
+      console.error("Error updating User:", error);
+    });
+    })
+  }
+
+
 
   // method to take all users returned from the database from the getAllUsers api and add them to the users state
   setUsers = (users) => {
     this.setState({
       users: users,
     })
-  }
-
-  setCurrentUser = (currentUser) => {
-    this.setState({ currentUser })
   }
 
   setCurrentUser = (currentUser) => {
@@ -95,8 +120,9 @@ export default class App extends React.Component {
           </nav>
 
           {/* Creating the React Paths to different pages */}
-          <Route path = "/profile"/> 
-          <Route path = "/feed" component={() => <Feed/>}/>                   
+          <Route path = "/feed" component={() => <Feed/>}/> 
+          <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
+                                                             updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
 
         </>
       </Router>
