@@ -3,6 +3,7 @@ import Login from './components/users/loginRegister';
 import Profile from './components/profile/Profile';
 import Post from './components/posts/Post'
 import Feed from './components/Feed/Feed'
+import { getUserbyID } from "./components/users/api";
 import {
   BrowserRouter as Router,
   Route,
@@ -22,6 +23,7 @@ export default class App extends React.Component {
     this.state = {
       token: getToken(),
       currentUser: {
+        id: '',
         firstName: 'fake',
         lastName: '',
         userName: '',
@@ -46,10 +48,25 @@ export default class App extends React.Component {
     });
   }
   
-  // 
-  // updateCurrentUserData = () => {
   
-  // }
+  updateCurrentUserDataFromDatabase = (userId) => {
+    getUserbyID(userId)
+    .then((response) => {
+      this.setState({
+        firstName: response.data.users.firstName,
+        lastName: response.data.users.lastName,
+        userName: response.data.users.userName,
+        password: response.data.users.password,
+        email: response.data.users.email,
+        location: response.data.users.location,
+        friends: response.data.users.friends,
+        posts: response.data.users.posts,
+        img: response.data.users.img,
+        timestamps: response.data.users.timestamps,
+      })
+      
+    })
+  }
 
 
 
@@ -98,7 +115,7 @@ export default class App extends React.Component {
 
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed" component={() => <Feed/>}/> 
-          <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}/>}/>
+          <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser} updateCurrentUserDataFromDatabase={this.updateCurrentUserDataFromDatabase}/>}/>
 
         </>
       </Router>

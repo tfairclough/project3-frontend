@@ -10,6 +10,13 @@ export const loginUser = (credentials) => {
 export const getAllUsers = () => {
     return axios.get(`${apiUrl}/users`)
 }  
+
+// api to get a specfic user by ID
+export const getUserbyID = (userId) => {
+  return axios.get(`${apiUrl}/users/${userId}`)
+}  
+
+
 // api to create a user
 export const createNewUser = (newUser) => {
     return axios.post(`${apiUrl}/register`, newUser)} 
