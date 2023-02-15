@@ -1,4 +1,5 @@
 import { getSearchedUsers } from './users/api'
+import { addFriends } from './users/api'
 import React from 'react';
 import Results from './Results'
 
@@ -8,7 +9,8 @@ class Search extends React.Component{
 
         this.state = {
             searchValue: '', 
-            searchResults:[]
+            searchResults:[],
+            friendId: ''
           }
     }
    // takes input and matches it to api users
@@ -31,9 +33,19 @@ class Search extends React.Component{
         })
   }
 
-   addToFriends = (user) => {
-        
+   addToFriends = (friendId) => {
+        this.setState({
+            friendId: friendId
+        })
   }; 
+
+  componentDidUpdate (prevProps, prevState) {
+    console.log(this.state.friendId)
+    console.log(this.props.currentUser.id)
+    if (prevState.friendId !== this.state.friendId) {
+        addFriends(this.props.currentUser.id, this.state.friendId)
+    } 
+  }
 
 render() {
         return (
@@ -45,8 +57,8 @@ render() {
                         onChange = {this.handleSearchChange}
                          />
                 <Results searchResults={this.state.searchResults}
-                         addToFriends={this.addToFriends}/>
-               {/*  <button type='submit' onSubmit={this.handleFriendsSubmit}>Add to Friends List</button>  */}
+                         addToFriends={this.addToFriends}
+                        /* friendId={this.state.addFriends} *//>
             </div>
         )
         }

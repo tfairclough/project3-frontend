@@ -21,6 +21,7 @@ export default class App extends React.Component {
     this.state = {
       token: getToken(),
       currentUser: {
+        id: '',
         firstName: '',
         lastName: '',
         userName: '',
@@ -92,7 +93,8 @@ export default class App extends React.Component {
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed"/> 
           <Route path = "/profile"/> 
-          <Route path = "/search" component={Search}/>
+          <Route path = "/search" component={Search} currentUser={this.state.currentUser}/>
+        
   
 
         </>

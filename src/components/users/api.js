@@ -29,7 +29,11 @@ export const getSearchedUsers = (name) => {
 }
 
 // api call to update current users friends
-
 export const addFriends = (id, user) => {
-    return axios.put(`${apiUrl}/addfriend/${id}`, user)
+    return axios.post(`${apiUrl}/users/${id}/friends`, user)
+}
+
+// api call to remove current users friends
+export const removeFriends = (id, user) => {
+    return axios.delete(`${apiUrl}/users/${id}/friends`, user)
 }
