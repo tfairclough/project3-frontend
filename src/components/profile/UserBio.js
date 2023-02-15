@@ -11,8 +11,6 @@ const UserBio = (props) => {
 
   const handleEditClick = () => {
     setEditMode(true)
-    console.log('save')
-    console.log(props.currentUser, updatedUserDetails)
   };
 
   const handleSaveClick =(e) => { 

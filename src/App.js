@@ -50,8 +50,6 @@ export default class App extends React.Component {
   
   
   updateCurrentUserFromDatabase = (userId) => {
-    setTimeout(500)
-    console.log('***********')
     getUserbyID(userId)
     .then((response) => {
       console.log(response.data.users.location)
@@ -70,7 +68,9 @@ export default class App extends React.Component {
           timestamps: response.data.users.timestamps,
         }
       })
-      
+    .catch((error) => {
+      console.error("Error updating User:", error);
+    });
     })
   }
 
