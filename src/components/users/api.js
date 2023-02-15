@@ -13,8 +13,7 @@ export const getAllUsers = () => {
 
 // api to get a specfic user by ID
 export const getUserbyID = (userId) => {
-  return axios.get(`${apiUrl}/users/${userId}`)
-}  
+  return axios.get(`${apiUrl}/users/${userId}`)}  
 
 // api to create a user
 export const createNewUser = (newUser) => {
@@ -30,23 +29,22 @@ export const compareUsername = (userDetails) => {
     
 // api to find all posts
 export const findPosts = () => {
-    return axios.get(`${apiUrl}/posts`)
-}
+    return axios.get(`${apiUrl}/posts`)}
 
 // api to edit post
 export const editPost = (postId, updatedContent) => {
-    return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})
-}
+    return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})}
 
 export const editUserDetails = (userId, updatedUserDetails) => {
-  return axios.patch(`${apiUrl}/users/${userId}`, { user: updatedUserDetails})
-}
+  return axios.patch(`${apiUrl}/users/${userId}`, { user: updatedUserDetails})}
 
 // api to get all searched users
 export const getSearchedUsers = (name) => {
-    return axios.get(`${apiUrl}/search`, name)
-}
+    return axios.get(`${apiUrl}/search`, name)}
 
+
+export const addLike = (postId) => {
+  return axios.patch(`${apiUrl}/posts/addLike/${postId}`)}
 
 // // Placeholder API for retrieving friends
 // export const getUserFriends = (user) => {

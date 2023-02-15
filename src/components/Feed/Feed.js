@@ -13,7 +13,7 @@ const Feed = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-  }, []);
+  }, [posts]);
 
   return (
     <div>
