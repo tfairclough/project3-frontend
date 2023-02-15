@@ -30,17 +30,17 @@ export const findPosts = () => {
 // api to edit post
 export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})
-}   
+}
 
-      
+export const editUserDetails = (userId, updatedUserDetails) => {
+  return axios.patch(`${apiUrl}/users/${userId}`, { user: updatedUserDetails})
+}
+
 // api to get all searched users
 export const getSearchedUsers = (name) => {
     return axios.get(`${apiUrl}/search`, name)
 }
 
-export const updateUserProfile = (id, updatedUserDetails) => {
-  return axios.put((`${apiUrl}/users/${id}`, updatedUserDetails))
-}
 
 // // Placeholder API for retrieving friends
 // export const getUserFriends = (user) => {

@@ -22,7 +22,7 @@ export default class App extends React.Component {
     this.state = {
       token: getToken(),
       currentUser: {
-        firstName: '',
+        firstName: 'fake',
         lastName: '',
         userName: '',
         // password: '',
@@ -46,6 +46,12 @@ export default class App extends React.Component {
     });
   }
   
+  // 
+  // updateCurrentUser = () => {
+
+  // }
+
+
 
   // method to take all users returned from the database from the getAllUsers api and add them to the users state
   setUsers = (users) => {
