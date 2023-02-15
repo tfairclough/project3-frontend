@@ -34,6 +34,6 @@ export const addFriends = (id, user) => {
 }
 
 // api call to remove current users friends
-export const removeFriends = (id, user) => {
+/* export const removeFriends = (id, user) => {
     return axios.delete(`${apiUrl}/users/${id}/friends`, user)
-}
+} */

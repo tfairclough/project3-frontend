@@ -55,6 +55,7 @@ export default class App extends React.Component {
   }
 
   setCurrentUser = (currentUser) => {
+    console.log(currentUser, 'current user in App')
     this.setState({ currentUser })
   }
 
@@ -93,7 +94,7 @@ export default class App extends React.Component {
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed"/> 
           <Route path = "/profile"/> 
-          <Route path = "/search" component={Search} currentUser={this.state.currentUser}/>
+          <Route path="/search" render={() => <Search currentUser={this.state.currentUser} />} />
         
   
 

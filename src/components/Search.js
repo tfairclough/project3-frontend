@@ -39,13 +39,25 @@ class Search extends React.Component{
         })
   }; 
 
-  componentDidUpdate (prevProps, prevState) {
+  addToFriendsList = () => {
+    const friendsId = {
+        friendId: this.state.friendId
+    }
+    console.log(this.props.currentUser, 'current user')
+    addFriends(this.props.currentUser.id, friendsId)
+    .then((res) => {
+        console.log(res)
+    })
+  }
+
+
+/*   componentDidUpdate (prevProps, prevState) {
     console.log(this.state.friendId)
     console.log(this.props.currentUser.id)
     if (prevState.friendId !== this.state.friendId) {
         addFriends(this.props.currentUser.id, this.state.friendId)
     } 
-  }
+  } */
 
 render() {
         return (
@@ -58,6 +70,7 @@ render() {
                          />
                 <Results searchResults={this.state.searchResults}
                          addToFriends={this.addToFriends}
+                         addToFriendsList={this.addToFriendsList}
                         /* friendId={this.state.addFriends} *//>
             </div>
         )

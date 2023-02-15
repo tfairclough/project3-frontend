@@ -12,8 +12,10 @@ class Results extends Component{
    } */
 
    handleFriendId = (friendId) => {
+    console.log(friendId)
    this.props.addToFriends(friendId)
-
+   this.props.addToFriendsList()
+    
    }
     render () {
          /* map searchedResults*/
