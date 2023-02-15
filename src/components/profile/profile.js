@@ -13,7 +13,8 @@ export default class Profile extends React.Component {
 
     return( 
       <>
-        <UserBio currentUser={this.props.currentUser}/>
+        <UserBio currentUser={this.props.currentUser} 
+                 updateCurrentUserFromDatabase={this.props.updateCurrentUserFromDatabase}/>
         {allFriends}
       </>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import profilePic from '../../assets/profilePic.jpg'
 import EditIcon from '../../assets/pencil_icon.png'
 import { editUserDetails } from "../users/api";
@@ -8,7 +8,6 @@ const UserBio = (props) => {
 
   const [editMode, setEditMode] = useState(false);
   const [updatedUserDetails, updateDetails] = useState(props.currentUser);
-
 
   const handleEditClick = () => {
     setEditMode(true)
@@ -23,6 +22,7 @@ const UserBio = (props) => {
     .then(() => {
       console.log("Post saved successfully");
       setEditMode(false);
+      props.updateCurrentUserFromDatabase(props.currentUser.id)
     })
     .catch((error) => {
       console.error("Error editing post:", error);
@@ -51,11 +51,11 @@ const UserBio = (props) => {
         <div>
         <img src={profilePic}/>
         <img className='pencil-icon' src={EditIcon} onClick={handleEditClick} width={50}/>
-        <p>FirstName: {updatedUserDetails.firstName}</p>
-        <p>LastName: {updatedUserDetails.lastName}</p>
-        <p>UserName: {updatedUserDetails.userName}</p>
-        <p>Email: {updatedUserDetails.email}</p>
-        <p>Location: {updatedUserDetails.location}</p>
+        <p>FirstName: {props.currentUser.firstName}</p>
+        <p>LastName: {props.currentUser.lastName}</p>
+        <p>UserName: {props.currentUser.userName}</p>
+        <p>Email: {props.currentUser.email}</p>
+        <p>Location: {props.currentUser.location}</p>
       </div>
       )}
     </>

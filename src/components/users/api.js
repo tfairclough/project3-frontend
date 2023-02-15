@@ -16,7 +16,6 @@ export const getUserbyID = (userId) => {
   return axios.get(`${apiUrl}/users/${userId}`)
 }  
 
-
 // api to create a user
 export const createNewUser = (newUser) => {
     return axios.post(`${apiUrl}/register`, newUser)} 

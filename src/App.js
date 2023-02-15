@@ -49,20 +49,26 @@ export default class App extends React.Component {
   }
   
   
-  updateCurrentUserDataFromDatabase = (userId) => {
+  updateCurrentUserFromDatabase = (userId) => {
+    setTimeout(500)
+    console.log('***********')
     getUserbyID(userId)
     .then((response) => {
+      console.log(response.data.users.location)
       this.setState({
-        firstName: response.data.users.firstName,
-        lastName: response.data.users.lastName,
-        userName: response.data.users.userName,
-        password: response.data.users.password,
-        email: response.data.users.email,
-        location: response.data.users.location,
-        friends: response.data.users.friends,
-        posts: response.data.users.posts,
-        img: response.data.users.img,
-        timestamps: response.data.users.timestamps,
+        currentUser : {
+          id: userId,
+          firstName: response.data.users.firstName,
+          lastName: response.data.users.lastName,
+          userName: response.data.users.userName,
+          password: response.data.users.password,
+          email: response.data.users.email,
+          location: response.data.users.location,
+          friends: response.data.users.friends,
+          posts: response.data.users.posts,
+          img: response.data.users.img,
+          timestamps: response.data.users.timestamps,
+        }
       })
       
     })
@@ -115,7 +121,8 @@ export default class App extends React.Component {
 
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed" component={() => <Feed/>}/> 
-          <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser} updateCurrentUserDataFromDatabase={this.updateCurrentUserDataFromDatabase}/>}/>
+          <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
+                                                             updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
 
         </>
       </Router>
