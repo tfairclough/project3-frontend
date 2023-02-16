@@ -6,7 +6,7 @@ import CreatePost from "../posts/CreatePost"
 const Feed = ( {currentUser} ) => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {    
+  useEffect(() => {
     findPosts()
       .then((response) => {
         setPosts(response.data.posts);
