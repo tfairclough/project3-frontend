@@ -24,8 +24,7 @@ const Feed = (props) => {
           console.error("Error fetching posts:", error);
         });
       }}, [props.currentUser] )
-   
-  console.log('hi')
+  
   return (
     <div>
       <h1>My Blog Posts</h1>
