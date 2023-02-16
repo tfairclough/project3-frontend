@@ -17,7 +17,8 @@ export default class Profile extends React.Component {
         <UserBio currentUser={this.props.currentUser} 
                  updateCurrentUserFromDatabase={this.props.updateCurrentUserFromDatabase}/>
         {allFriends}
-        <Feed currentUser={this.props.currentUser} profilePage={true}/>
+        <Feed currentUser={this.props.currentUser} 
+              profilePage={true}/>
       </>
     )
   }

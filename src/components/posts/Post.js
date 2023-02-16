@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { editPost, addLike, findPost } from "../users/api";
 
-const Post = ({ postId }) => {
+const Post = (props) => {
   // Define a state variable (editMode) using the useState hook, initially set to false
   const [editMode, setEditMode] = useState(false);
   const [postData, setPost] = useState({post: {
@@ -10,7 +10,7 @@ const Post = ({ postId }) => {
                                           content:''  
   }});
   
-  findPost(postId)
+  findPost(props.postId)
   .then(result => result.data)
   .then(data => setPost(data))
 
@@ -30,6 +30,7 @@ const Post = ({ postId }) => {
       .then(() => {
         console.log("Post saved successfully");
         setEditMode(false);
+        findPost(props.postId)
       })
       .catch((error) => {
         console.error("Error editing post:", error);
@@ -46,6 +47,7 @@ const Post = ({ postId }) => {
   const handleLikeButtonClick = (e) => {
     // Call the addLike API with the post ID
     addLike(postData.post._id);
+    findPost(props.postId)
   };
 
   // Render the component UI
