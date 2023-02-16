@@ -15,11 +15,12 @@ const Post = (props) => {
   .then(data => setPost(data))
 
   // Define a state variable (updatedPostBody) using the useState hook, initialized with the content of the post
-  const [updatedPostBody, setUpdatedPostBody] = useState(postData.post.content);
+  const [updatedPostBody, setUpdatedPostBody] = useState('');
 
 
   // Function to handle the click of the "Edit" button
   const handleEditClick = () => {
+    setUpdatedPostBody(postData.post.content)
     setEditMode(true);
   };
 
@@ -61,7 +62,7 @@ const Post = (props) => {
       ) : (
         <div>
           <p>{postData.post.content}</p>
-          <button onClick={handleEditClick}>Edit</button>
+          {props.profilePage && <button onClick={handleEditClick}>Edit</button>}
         </div>
       )}
       <div>

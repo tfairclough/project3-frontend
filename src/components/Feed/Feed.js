@@ -32,7 +32,8 @@ const Feed = (props) => {
         <Post key={postId} 
               postId={postId}
               currentUser={props.currentUser} 
-              updateCurrentUserFromDatabase={props.updateCurrentUserFromDatabase}/>                
+              updateCurrentUserFromDatabase={props.updateCurrentUserFromDatabase}
+              profilePage={props.profilePage}/>                
       ))}
       {props.profilePage && <CreatePost currentUser={props.currentUser}/>}      
 
