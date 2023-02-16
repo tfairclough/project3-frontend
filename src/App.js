@@ -35,6 +35,7 @@ export default class App extends React.Component {
       }
     };
   }
+
   componentDidMount() {
       const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
       if (storedCurrentUser) {
@@ -94,6 +95,7 @@ export default class App extends React.Component {
   }
   setCurrentUser = (currentUser) => {
     this.setState({ currentUser }, () => {
+
       localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser));
     })
   }
