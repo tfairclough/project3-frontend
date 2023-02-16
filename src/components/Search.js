@@ -12,9 +12,19 @@ class Search extends React.Component{
             searchValue: '', 
             searchResults:[],
             friendId: '',
-            friendsList: this.props.currentUser.friends
+            friendsList: [],
+            currentUserId: this.props.currentUser.id
           }
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.currentUser.friends !== prevProps.currentUser.friends) {
+          this.setState({
+            friendsList: this.props.currentUser.friends
+          });
+        }
+      }
+
    // takes input and matches it to api users
    // backend is where we filter input to match db
     handleSearchChange = (e) => {
@@ -35,33 +45,39 @@ class Search extends React.Component{
         })
   }
 
-/*    addToFriends = (friendId) => {
+   addToFriends = (friendId) => {
         this.setState({
-            friendId: friendId
+         friendId: friendId
         })
-  }; */ 
+  }; 
 
-  addToFriendsList = () => {
-    const friendsId = {
+  addToFriendsList = (friendId) => {
+    const userId = this.state.currentUserId
+    console.log('user Id', userId)
+    /* const friendsId = {
         friendId: this.state.friendId
-    }
+    } */
+    console.log('friends Id', friendId)
     console.log(this.props.currentUser, 'current user')
-    addFriends(this.props.currentUser.id, friendsId)
+    addFriends(this.props.currentUser.id, {friendId: friendId})
     .then((res) => {
         console.log(res)
-        this.props.updateCurrentUserFromDatabase()
+        this.props.updateCurrentUserFromDatabase(userId)
     })
   }
 
-  removeFromFriendsList = () => {
-    const friendsId = {
+  removeFromFriendsList = (friendId) => {
+    const userId = this.state.currentUserId
+    console.log('user Id', userId)
+   /*  const friendsId = {
         friendId: this.state.friendId
-    }
+    } */
+    console.log('friends Id', friendId)
     console.log(this.props.currentUser, 'current user')
-    removeFriends(this.props.currentUser.id, friendsId)
+    removeFriends(this.props.currentUser.id, {friendId: friendId})
     .then((res) => {
         console.log(res)
-        this.props.updateCurrentUserFromDatabase()
+        this.props.updateCurrentUserFromDatabase(userId)
     })
   }
 
@@ -84,11 +100,13 @@ render() {
                         onChange = {this.handleSearchChange}
                          />
                 <Results searchResults={this.state.searchResults}
-                         /* addToFriends={this.addToFriends} */
+                         addToFriends={this.addToFriends}
                          addToFriendsList={this.addToFriendsList}
                          removeFromFriendsList={this.removeFromFriendsList}
                          friendsList={this.state.friendsList}
-                        /* friendId={this.state.addFriends} *//>
+                         currentUserId={this.state.currentUserId}
+                    
+                        updateFriendId={this.state.friendId}/>
             </div>
         )
         }

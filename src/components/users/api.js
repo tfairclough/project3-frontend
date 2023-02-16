@@ -48,6 +48,7 @@ export const getSearchedUsers = (name) => {
 
 // api call to update current users friends
 export const addFriends = (id, user) => {
+    console.log('api call', id, user)
     return axios.post(`${apiUrl}/users/${id}/friends`, user)
 }
 
