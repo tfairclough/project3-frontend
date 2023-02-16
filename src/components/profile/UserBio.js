@@ -8,7 +8,6 @@ const UserBio = (props) => {
 
   const [editMode, setEditMode] = useState(false);
   const [updatedUserDetails, updateDetails] = useState(props.currentUser);
-
   const handleEditClick = () => {
     setEditMode(true)
   };

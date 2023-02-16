@@ -147,7 +147,8 @@ export default class App extends React.Component {
           <Route path="/search" render={() => <Search currentUser={this.state.currentUser}
                                                       updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase} />} />
           <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser} 
-                                                       profilePage={false}/>}/> 
+                                                       profilePage={false}
+                                                       updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
 
