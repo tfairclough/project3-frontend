@@ -42,7 +42,6 @@ export const addPost = (content) => {
 export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})}
 
-// api to edit a specific user details
 export const editUserDetails = (userId, updatedUserDetails) => {
   return axios.patch(`${apiUrl}/users/${userId}`, { user: updatedUserDetails})}
 
@@ -50,7 +49,7 @@ export const editUserDetails = (userId, updatedUserDetails) => {
 export const getSearchedUsers = (name) => {
     return axios.get(`${apiUrl}/search`, name)}
 
-// api to add a like to a post
+
 export const addLike = (postId) => {
   return axios.patch(`${apiUrl}/posts/addLike/${postId}`)}
 
