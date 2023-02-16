@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { findPosts } from "../users/api";
 import Post from "../posts/Post";
 import CreatePost from "../posts/CreatePost"
+
 const Feed = ( {currentUser} ) => {
   const [posts, setPosts] = useState([]);
 
@@ -22,6 +23,7 @@ const Feed = ( {currentUser} ) => {
         <Post key={post._id} post={post} />                
       ))}
       <CreatePost currentUser={currentUser}/>      
+
     </div>
   );
 };
