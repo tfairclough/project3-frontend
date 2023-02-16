@@ -18,7 +18,7 @@ const UserBio = (props) => {
     //  
     // Need to update the user details
     .then(() => {
-      console.log("Post saved successfully");
+      console.log("User profile updated successfully");
       setEditMode(false);
       props.updateCurrentUserFromDatabase(props.currentUser.id)
     })

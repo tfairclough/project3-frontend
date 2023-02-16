@@ -30,10 +30,17 @@ export const findPosts = () => {
     return axios.get(`${apiUrl}/posts`)}
 
 // api to add a post
-export const addPost = (content) => { 
-    return axios.post(`${apiUrl}/posts/create`, { content: content })
-}
- 
+export const addPost = (userId, content) => { 
+    return axios.post(`${apiUrl}/posts/create/${userId}`, { content: content })}
+
+// api to find a specific post by ID
+export const findPost = (postId) => {
+  return axios.get(`${apiUrl}/posts/${postId}`)}
+
+// api to find this users posts
+export const findMyPosts = (userId) => {
+  return axios.get(`${apiUrl}/users/posts/${userId}`)}
+
 // api to edit post
 export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})}

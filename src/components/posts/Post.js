@@ -1,12 +1,22 @@
 import React, { useState } from "react";
-import { editPost, addLike } from "../users/api";
+import { editPost, addLike, findPost } from "../users/api";
 
-const Post = ({ post }) => {
+const Post = ({ postId }) => {
   // Define a state variable (editMode) using the useState hook, initially set to false
   const [editMode, setEditMode] = useState(false);
+  const [postData, setPost] = useState({post: {
+                                          comments:[],
+                                          likes: '',
+                                          content:''  
+  }});
+  
+  findPost(postId)
+  .then(result => result.data)
+  .then(data => setPost(data))
 
   // Define a state variable (updatedPostBody) using the useState hook, initialized with the content of the post
-  const [updatedPostBody, setUpdatedPostBody] = useState(post.content);
+  const [updatedPostBody, setUpdatedPostBody] = useState(postData.post.content);
+
 
   // Function to handle the click of the "Edit" button
   const handleEditClick = () => {
@@ -16,7 +26,7 @@ const Post = ({ post }) => {
   // Function to handle the click of the "Save" button
   const handleSaveClick = () => {
     // Call the editPost API with the post ID and updated post content, and set editMode to false when the promise resolves
-    editPost(post._id, updatedPostBody)
+    editPost(postData.post._id, updatedPostBody)
       .then(() => {
         console.log("Post saved successfully");
         setEditMode(false);
@@ -35,7 +45,7 @@ const Post = ({ post }) => {
   // Function to handle the click of the "Like" button
   const handleLikeButtonClick = (e) => {
     // Call the addLike API with the post ID
-    addLike(post._id);
+    addLike(postData.post._id);
   };
 
   // Render the component UI
@@ -48,13 +58,13 @@ const Post = ({ post }) => {
         </div>
       ) : (
         <div>
-          <p>{post.content}</p>
+          <p>{postData.post.content}</p>
           <button onClick={handleEditClick}>Edit</button>
         </div>
       )}
       <div>
         <button onClick={handleLikeButtonClick}>Like</button>
-        <p>Likes: {post.likes}</p>
+        <p>Likes: {postData.post.likes}</p>
       </div>
     </div>
   );
