@@ -1,5 +1,6 @@
 import { getSearchedUsers } from './users/api'
 import { addFriends } from './users/api'
+import { removeFriends } from './users/api';
 import React from 'react';
 import Results from './Results'
 
@@ -10,7 +11,8 @@ class Search extends React.Component{
         this.state = {
             searchValue: '', 
             searchResults:[],
-            friendId: ''
+            friendId: '',
+            friendsList: this.props.currentUser.friends
           }
     }
    // takes input and matches it to api users
@@ -33,11 +35,11 @@ class Search extends React.Component{
         })
   }
 
-   addToFriends = (friendId) => {
+/*    addToFriends = (friendId) => {
         this.setState({
             friendId: friendId
         })
-  }; 
+  }; */ 
 
   addToFriendsList = () => {
     const friendsId = {
@@ -47,6 +49,19 @@ class Search extends React.Component{
     addFriends(this.props.currentUser.id, friendsId)
     .then((res) => {
         console.log(res)
+        this.props.updateCurrentUserFromDatabase()
+    })
+  }
+
+  removeFromFriendsList = () => {
+    const friendsId = {
+        friendId: this.state.friendId
+    }
+    console.log(this.props.currentUser, 'current user')
+    removeFriends(this.props.currentUser.id, friendsId)
+    .then((res) => {
+        console.log(res)
+        this.props.updateCurrentUserFromDatabase()
     })
   }
 
@@ -69,8 +84,10 @@ render() {
                         onChange = {this.handleSearchChange}
                          />
                 <Results searchResults={this.state.searchResults}
-                         addToFriends={this.addToFriends}
+                         /* addToFriends={this.addToFriends} */
                          addToFriendsList={this.addToFriendsList}
+                         removeFromFriendsList={this.removeFromFriendsList}
+                         friendsList={this.state.friendsList}
                         /* friendId={this.state.addFriends} *//>
             </div>
         )

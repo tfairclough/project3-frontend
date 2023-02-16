@@ -31,7 +31,7 @@ export default class App extends React.Component {
         // password: '',
         // email: '',
         // location: '',
-        friends: [],
+        friends: ['friend12', 'adfag88', 'adfgag777'],
         // posts: [''],
         // img: '',
         // timestamps: ''
@@ -123,7 +123,8 @@ export default class App extends React.Component {
 
           {/* Creating the React Paths to different pages */}
            
-          <Route path="/search" render={() => <Search currentUser={this.state.currentUser} />} />
+          <Route path="/search" render={() => <Search currentUser={this.state.currentUser}
+                                                      updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase} />} />
           <Route path = "/feed" component={() => <Feed/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
