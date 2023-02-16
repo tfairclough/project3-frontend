@@ -24,7 +24,7 @@ const Feed = ( {currentUser, profilePage} ) => {
       {posts.map((postId) => (
         <Post key={postId} postId={postId} />                
       ))}
-      <CreatePost currentUser={currentUser}/>      
+      {profilePage && <CreatePost currentUser={currentUser}/>}      
 
     </div>
   );
