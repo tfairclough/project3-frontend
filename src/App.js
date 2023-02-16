@@ -27,13 +27,13 @@ export default class App extends React.Component {
         firstName: 'fake',
         lastName: '',
         userName: '',
-        // password: '',
-        // email: '',
-        // location: '',
+        password: '',
+        email: '',
+        location: '',
         friends: [],
-        // posts: [''],
-        // img: '',
-        // timestamps: ''
+        posts: [''],
+        img: '',
+        timestamps: ''
       }
     };
   }
