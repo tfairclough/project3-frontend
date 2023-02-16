@@ -13,9 +13,9 @@ const Post = ({ postId }) => {
   findPost(postId)
   .then(result => result.data)
   .then(data => setPost(data))
-  
+
   // Define a state variable (updatedPostBody) using the useState hook, initialized with the content of the post
-  const [updatedPostBody, setUpdatedPostBody] = useState(postData.content);
+  const [updatedPostBody, setUpdatedPostBody] = useState(postData.post.content);
 
 
   // Function to handle the click of the "Edit" button

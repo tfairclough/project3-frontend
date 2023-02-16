@@ -7,13 +7,15 @@ const Feed = ( {currentUser, profilePage} ) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    findMyPosts(currentUser.id)
-      .then((response) => {
-        setPosts(response.data.posts);
-      })
-      .catch((error) => {
-        console.error("Error fetching posts:", error);
-      });
+    if (currentUser.id) {
+      findMyPosts(currentUser.id)
+        .then((response) => {
+          setPosts(response.data.posts);
+        })
+        .catch((error) => {
+          console.error("Error fetching posts:", error);
+        });
+      }
   }, [posts]);
 
   return (
