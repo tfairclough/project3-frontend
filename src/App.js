@@ -38,10 +38,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
-    if (storedCurrentUser) {
-      this.setState({ currentUser: storedCurrentUser })
-    }
+      const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
+      if (storedCurrentUser) {
+        this.updateCurrentUserFromDatabase(storedCurrentUser.id)
+      }
   }
 
   // Removes token from local storage and sets URL to /login 
