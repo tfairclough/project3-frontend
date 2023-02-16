@@ -67,7 +67,7 @@ const Post = (props) => {
         </div>
       )}
       <div>
-        <button onClick={handleLikeButtonClick}>Like</button>
+        {!props.profilePage &&<button onClick={handleLikeButtonClick}>Like</button>}
         <p>Likes: {postData.post.likes}</p>
       </div>
     </div>

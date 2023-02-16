@@ -128,7 +128,8 @@ export default class App extends React.Component {
           </nav>
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser} 
-                                                       profilePage={false}/>}/> 
+                                                       profilePage={false}
+                                                       updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
         </>

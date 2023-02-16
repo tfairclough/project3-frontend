@@ -18,7 +18,8 @@ export default class Profile extends React.Component {
                  updateCurrentUserFromDatabase={this.props.updateCurrentUserFromDatabase}/>
         {allFriends}
         <Feed currentUser={this.props.currentUser} 
-              profilePage={true}/>
+              profilePage={true}
+              updateCurrentUserFromDatabase={this.props.updateCurrentUserFromDatabase}/>
       </>
     )
   }
