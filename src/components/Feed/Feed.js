@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { findMyPosts } from "../users/api";
+import { findMyPosts, findPosts } from "../users/api";
 import Post from "../posts/Post";
 import CreatePost from "../posts/CreatePost"
 
@@ -8,15 +8,23 @@ const Feed = ( {currentUser, profilePage} ) => {
 
   useEffect(() => {
     if (currentUser.id) {
-      findMyPosts(currentUser.id)
+      profilePage ? findMyPosts(currentUser.id)
         .then((response) => {
           setPosts(response.data.posts);
         })
         .catch((error) => {
           console.error("Error fetching posts:", error);
+        })     
+      
+      : findPosts()
+        .then((response) => {
+          setPosts(response.data.posts.map((post) => post._id));
+        })
+        .catch((error) => {
+          console.error("Error fetching posts:", error);
         });
       }
-  }, [posts]);
+  }, []);
 
   return (
     <div>
