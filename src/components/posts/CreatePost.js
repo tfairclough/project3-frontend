@@ -12,7 +12,7 @@ const CreatePost = ( {currentUser} ) => {
   const handlePostSubmit = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
     // Call the addPost function from the API module, passing in the postContent state
-    addPost(currentUser.id, postContent)
+    addPost(currentUser, postContent)
       .then((response) => {
         console.log('Post created successfully:', response.data);        
         setShowForm(false); // Hide the form after the post is created        

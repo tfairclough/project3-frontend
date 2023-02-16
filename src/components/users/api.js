@@ -30,8 +30,8 @@ export const findPosts = () => {
     return axios.get(`${apiUrl}/posts`)}
 
 // api to add a post
-export const addPost = (userId, content) => { 
-    return axios.post(`${apiUrl}/posts/create/${userId}`, { content: content })}
+export const addPost = (user, content) => { 
+    return axios.post(`${apiUrl}/posts/create/${user.id}`, { content: content, createdBy: user.userName })}
 
 // api to find a specific post by ID
 export const findPost = (postId) => {

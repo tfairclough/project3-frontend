@@ -54,6 +54,7 @@ const Post = (props) => {
   // Render the component UI
   return (
     <div>
+      <h4>Posted by: {postData.post.createdBy}</h4>
       {editMode ? (
         <div>
           <textarea value={updatedPostBody} onChange={handleTextareaChange} />

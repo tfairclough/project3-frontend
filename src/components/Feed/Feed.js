@@ -6,7 +6,6 @@ import CreatePost from "../posts/CreatePost"
 const Feed = (props) => {
   const [posts, setPosts] = useState([]);
   
-
   if (props.currentUser.id) {
     props.profilePage ? findMyPosts(props.currentUser.id)
       .then((response) => {
