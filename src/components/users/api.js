@@ -29,6 +29,11 @@ export const compareUsername = (userDetails) => {
 export const findPosts = () => {
     return axios.get(`${apiUrl}/posts`)}
 
+// api to add a post
+export const addPost = (content) => { 
+    return axios.post(`${apiUrl}/posts/create`, { content: content })
+}
+ 
 // api to edit post
 export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})}
