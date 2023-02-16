@@ -9,6 +9,7 @@ import {
   Route,
   Link
 } from 'react-router-dom' 
+import Search from './components/Search'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -135,13 +136,17 @@ export default class App extends React.Component {
           <nav>
             <Link to = "/feed">Feed</Link>
             <Link to = "/profile">Profile</Link>
+            <Link to = "/search">Search</Link>
 
             {/* Logout button */}
             <button onClick={this.logout}>Logout</button>
           </nav>
 
           {/* Creating the React Paths to different pages */}
-          <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser}/>}/> 
+           
+          <Route path="/search" render={() => <Search currentUser={this.state.currentUser}
+                                                      updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase} />} />
+          <Route path = "/feed" component={() => <Feed/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
 
@@ -150,7 +155,8 @@ export default class App extends React.Component {
     )
     }
   }
-} 
+}
+
 
 // Alternative code to use functional components 
 // import useToken from './useToken';

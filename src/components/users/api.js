@@ -50,7 +50,19 @@ export const editUserDetails = (userId, updatedUserDetails) => {
 
 // api to get all searched users
 export const getSearchedUsers = (name) => {
-    return axios.get(`${apiUrl}/search`, name)}
+    return axios.get(`${apiUrl}/search/${name}`)
+}
+
+// api call to update current users friends
+export const addFriends = (id, user) => {
+    console.log('api call', id, user)
+    return axios.post(`${apiUrl}/users/${id}/friends`, user)
+}
+
+// api call to remove current users friends
+export const removeFriends = (id, user) => {
+    return axios.delete(`${apiUrl}/users/${id}/friends`, user)
+}
 
 
 export const addLike = (postId) => {
