@@ -8,26 +8,24 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom' 
-
+} from 'react-router-dom'
+import Search from './components/Search'
+import './App.css'
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-
     // Retrieve token from local storage
     const getToken = () => {
         const tokenString = localStorage.getItem('token');
         return tokenString || '';
     };
-
     this.state = {
       token: getToken(),
       currentUser: {
         id: '',
-        firstName: 'fake',
+        firstName: '',
         lastName: '',
         userName: '',
-        password: '',
         email: '',
         location: '',
         friends: [],
@@ -37,18 +35,34 @@ export default class App extends React.Component {
       }
     };
   }
-
-  // Removes token from local storage and sets URL to /login 
+  componentDidMount() {
+      const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
+      if (storedCurrentUser) {
+        this.updateCurrentUserFromDatabase(storedCurrentUser.id)
+      }
+  }
+  // Removes token from local storage and sets URL to /login
   logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
     this.setState({
-      token: ''
+      token: '',
+      currentUser: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        location: '',
+        friends: [],
+        posts: [''],
+        img: '',
+        timestamps: '',
+      }
     }, () => {
       window.history.pushState({}, 'Login', '/login');
     });
   }
-  
-  
   updateCurrentUserFromDatabase = (userId) => {
     getUserbyID(userId)
     .then((response) => {
@@ -72,21 +86,17 @@ export default class App extends React.Component {
       console.error("Error updating User:", error);
     });
   }
-
-
-
-
   // method to take all users returned from the database from the getAllUsers api and add them to the users state
   setUsers = (users) => {
     this.setState({
       users: users,
     })
   }
-
   setCurrentUser = (currentUser) => {
-    this.setState({ currentUser })
+    this.setState({ currentUser }, () => {
+      localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser));
+    })
   }
-
   // Saves token to local storage
   saveToken = (userToken) => {
     localStorage.setItem('token', userToken);
@@ -94,42 +104,39 @@ export default class App extends React.Component {
       token: userToken
     });
   };
-
   render() {
     const { token } = this.state;
-
     // Checks if a token exists if not the login page is loaded
     if (!token) {
-      return <Login setToken={this.saveToken} 
+      return <Login setToken={this.saveToken}
       setCurrentUser={this.setCurrentUser}/>;
     } else {
-
     return(
       <Router>
         <>
-        
-          <h1>Naptser Social app</h1>
-
           {/* Nav bar links to each React Route */}
           <nav>
+          <h1 id='nav-h1'>Naptser Social</h1>
+            
+            <div className='search-box'>
+            <Search currentUser={this.state.currentUser}
+                    updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase} />            </div>                                          
             <Link to = "/feed">Feed</Link>
             <Link to = "/profile">Profile</Link>
-
             {/* Logout button */}
             <button onClick={this.logout}>Logout</button>
           </nav>
-
           {/* Creating the React Paths to different pages */}
-          <Route path = "/feed" component={() => <Feed/>}/> 
+          
+          <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser}/>}/>
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
-
         </>
       </Router>
     )
     }
   }
-} 
+}
 
 // Alternative code to use functional components 
 // import useToken from './useToken';

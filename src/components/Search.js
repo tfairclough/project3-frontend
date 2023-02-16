@@ -75,9 +75,8 @@ class Search extends React.Component{
 render() {
         return (
             <div>
-                <label>Search for friends</label>
-                <input type = 'search'
-                        placeholder = "Search for friends"
+                <input className='friend-search' type = 'search'
+                        placeholder = "Search for friends..."
                         value = {this.state.searchValue}
                         onChange = {this.handleSearchChange}
                          />

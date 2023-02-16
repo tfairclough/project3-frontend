@@ -1,1 +1,27 @@
+nav {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    display: inline-flex;
+    background-color: rgba(206, 3, 247, 0.356);
+    justify-content: center;
+}
 
+#nav-h1 {
+    font-size: 70px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    color: rgb(2, 2, 155);
+}
+
+.friend-search {
+    width: 500px;
+    height: 60px;
+    padding-left: 25px;
+    margin: 5px;
+    border: solid 1px rgb(206, 3, 247);
+    border-radius: 50px;
+}
