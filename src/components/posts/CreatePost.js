@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addPost } from "../users/api";
 
 // Define the CreatePost component
-const CreatePost = () => {
+const CreatePost = ( {currentUser} ) => {
   // Define the postContent state with the useState hook, and initialize it to an empty string
   const [postContent, setPostContent] = useState('');
   // Define the showForm state with the useState hook, and initialize it to false
@@ -12,7 +12,8 @@ const CreatePost = () => {
   const handlePostSubmit = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
     // Call the addPost function from the API module, passing in the postContent state
-    addPost(postContent)
+    console.log(currentUser.id)
+    addPost(currentUser.id, postContent)
       .then((response) => {
         console.log('Post created successfully:', response.data);        
         setShowForm(false); // Hide the form after the post is created        

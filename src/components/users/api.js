@@ -30,8 +30,8 @@ export const findPosts = () => {
     return axios.get(`${apiUrl}/posts`)}
 
 // api to add a post
-export const addPost = (content) => { 
-    return axios.post(`${apiUrl}/posts/create`, { content: content })
+export const addPost = (userId, content) => { 
+    return axios.post(`${apiUrl}/posts/create/${userId}`, { content: content })
 }
  
 // api to edit post

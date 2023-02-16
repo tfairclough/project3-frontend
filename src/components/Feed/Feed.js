@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { findPosts } from "../users/api";
 import Post from "../posts/Post";
 import CreatePost from "../posts/CreatePost"
-const Feed = () => {
+const Feed = ( {currentUser} ) => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => {    
     findPosts()
       .then((response) => {
         setPosts(response.data.posts);
@@ -21,7 +21,7 @@ const Feed = () => {
       {posts.map((post) => (
         <Post key={post._id} post={post} />                
       ))}
-      <CreatePost/>
+      <CreatePost currentUser={currentUser}/>      
     </div>
   );
 };
