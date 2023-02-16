@@ -25,7 +25,7 @@ const Feed = (props) => {
     }
 
   return (
-    <div>
+    <div className="posts-wrapper">
       <h1>My Blog Posts</h1>
       {posts.map((postId) => (
         <Post key={postId} 
