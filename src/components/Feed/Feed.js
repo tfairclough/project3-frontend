@@ -20,7 +20,7 @@ const Feed = ( {currentUser, profilePage} ) => {
     <div>
       <h1>My Blog Posts</h1>
       {posts.map((postId) => (
-        <Post key={postId} post={postId} />                
+        <Post key={postId} postId={postId} />                
       ))}
       <CreatePost currentUser={currentUser}/>      
 
