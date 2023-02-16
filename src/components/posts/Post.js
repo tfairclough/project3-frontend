@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { editPost, addLike, findPost } from "../users/api";
 
-const Post = ({ postId }) => {
+const Post = (props) => {
   // Define a state variable (editMode) using the useState hook, initially set to false
   const [editMode, setEditMode] = useState(false);
   const [postData, setPost] = useState({post: {
@@ -10,16 +10,17 @@ const Post = ({ postId }) => {
                                           content:''  
   }});
   
-  findPost(postId)
+  findPost(props.postId)
   .then(result => result.data)
   .then(data => setPost(data))
 
   // Define a state variable (updatedPostBody) using the useState hook, initialized with the content of the post
-  const [updatedPostBody, setUpdatedPostBody] = useState(postData.post.content);
+  const [updatedPostBody, setUpdatedPostBody] = useState('');
 
 
   // Function to handle the click of the "Edit" button
   const handleEditClick = () => {
+    setUpdatedPostBody(postData.post.content)
     setEditMode(true);
   };
 
@@ -30,6 +31,7 @@ const Post = ({ postId }) => {
       .then(() => {
         console.log("Post saved successfully");
         setEditMode(false);
+        findPost(props.postId)
       })
       .catch((error) => {
         console.error("Error editing post:", error);
@@ -46,11 +48,13 @@ const Post = ({ postId }) => {
   const handleLikeButtonClick = (e) => {
     // Call the addLike API with the post ID
     addLike(postData.post._id);
+    findPost(props.postId)
   };
 
   // Render the component UI
   return (
     <div>
+      <h4>Posted by: {postData.post.createdBy}</h4>
       {editMode ? (
         <div>
           <textarea value={updatedPostBody} onChange={handleTextareaChange} />
@@ -59,7 +63,7 @@ const Post = ({ postId }) => {
       ) : (
         <div>
           <p>{postData.post.content}</p>
-          <button onClick={handleEditClick}>Edit</button>
+          {props.profilePage && <button onClick={handleEditClick}>Edit</button>}
         </div>
       )}
       <div>

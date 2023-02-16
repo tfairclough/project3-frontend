@@ -127,8 +127,8 @@ export default class App extends React.Component {
             <button onClick={this.logout}>Logout</button>
           </nav>
           {/* Creating the React Paths to different pages */}
-          
-          <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser}/>}/>
+          <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser} 
+                                                       profilePage={false}/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
         </>
