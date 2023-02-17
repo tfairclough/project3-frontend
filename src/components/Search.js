@@ -72,6 +72,12 @@ class Search extends React.Component{
     })
   }
 
+  updateFriendsList = () => {
+    this.setState({ friendsList: this.state.friendsList });
+    this.props.updateCurrentUserFromDatabase(this.state.currentUserId)
+  };
+  
+
 render() {
         return (
             <div>
@@ -80,14 +86,16 @@ render() {
                         value = {this.state.searchValue}
                         onChange = {this.handleSearchChange}
                          />
+                <div className='results-wrapper'>
                 <Results searchResults={this.state.searchResults}
                          addToFriends={this.addToFriends}
                          addToFriendsList={this.addToFriendsList}
                          removeFromFriendsList={this.removeFromFriendsList}
                          friendsList={this.state.friendsList}
                          currentUserId={this.state.currentUserId}
-                    
+                         updateFriendsList={this.updateFriendsList}
                         updateFriendId={this.state.friendId}/>
+                        </div>
             </div>
         )
         }

@@ -26,8 +26,11 @@ const Feed = (props) => {
       }}, [props.currentUser] )
   
   return (
-    <div>
+    <div className="posts-wrapper">
       <h1>My Blog Posts</h1>
+      {props.profilePage && <CreatePost currentUser={props.currentUser}
+                                        updateCurrentUserFromDatabase={props.updateCurrentUserFromDatabase}/>}      
+
       {posts.length !== 0 && posts.map((postId) => (
         <Post key={postId} 
               postId={postId}

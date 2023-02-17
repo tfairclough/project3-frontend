@@ -35,6 +35,7 @@ export default class App extends React.Component {
       }
     };
   }
+
   componentDidMount() {
       const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'))
       if (storedCurrentUser) {
@@ -94,6 +95,7 @@ export default class App extends React.Component {
   }
   setCurrentUser = (currentUser) => {
     this.setState({ currentUser }, () => {
+
       localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser));
     })
   }
@@ -112,8 +114,9 @@ export default class App extends React.Component {
       setCurrentUser={this.setCurrentUser}/>;
     } else {
     return(
+      <div className='wrapper'>
       <Router>
-        <>
+        
           {/* Nav bar links to each React Route */}
           <nav>
           <h1 id='nav-h1'>Naptser Social</h1>
@@ -121,10 +124,12 @@ export default class App extends React.Component {
             <div className='search-box'>
             <Search currentUser={this.state.currentUser}
                     updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase} />            </div>                                          
+            <div className='nav-buttons'>
             <Link to = "/feed">Feed</Link>
             <Link to = "/profile">Profile</Link>
             {/* Logout button */}
             <button onClick={this.logout}>Logout</button>
+            </div>
           </nav>
           {/* Creating the React Paths to different pages */}
           <Route path = "/feed" component={() => <Feed currentUser={this.state.currentUser} 
@@ -132,8 +137,9 @@ export default class App extends React.Component {
                                                        updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/> 
           <Route path = "/profile" component={() => <Profile currentUser={this.state.currentUser}
                                                              updateCurrentUserFromDatabase={this.updateCurrentUserFromDatabase}/>}/>
-        </>
+        
       </Router>
+      </div>
     )
     }
   }
