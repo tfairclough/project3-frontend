@@ -41,6 +41,10 @@ export const findPost = (postId) => {
 export const findMyPosts = (userId) => {
   return axios.get(`${apiUrl}/users/posts/${userId}`)}
 
+//   delete posts 
+export const deleteMyPosts = (postID) => {
+    return axios.delete(`${apiUrl}/users/posts/${postID}`)}
+
 // api to edit post
 export const editPost = (postId, updatedContent) => {
     return axios.patch(`${apiUrl}/posts/edit/${postId}`, { content: updatedContent})}
