@@ -22,7 +22,7 @@ export default class Login extends React.Component {
       location: '',
       isLoginForm: true,
       loginErrorMessage: '',
-      registerErrorMessage: [],
+      registerErrorMessage: '',
       showPassword: false,
     };
   } 
