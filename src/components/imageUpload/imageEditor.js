@@ -9,7 +9,7 @@ class ImageUploader extends Component {
       image: null,
       imageUrl: "",
       imageFile: null,
-      imageName: null
+      imageName: null 
     };
   }
 
