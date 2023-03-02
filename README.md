@@ -1,8 +1,8 @@
-# Project-2-api-React-App
+# Project-3
 ---
 
 Developer: Tom Fairclough <br>
-Technologies: HTML/CSS/JavaScript/React/Axios
+Technologies: HTML/CSS/JavaScript/React/Axios/Express
 
 ## Description
 - - -
@@ -138,13 +138,15 @@ In this section I step through the build process, highlighting extracts from the
 ## Challenges
 - - -
 
--  <br>
+-  As we were a team of four, we were often dependent on sections being being completed before we could progress. Making sure everyone was communicating their blockers effectively took a bit of time, as well as uinderstanding how their sections linked into other bits of the code.
 
 
-- <br>
+- useEffect - Avoiding infinite loops and making sure we were pulling the data from the database effectively while using ther benefits of React state
 
 
 ##  Future Improvments
 - - -
 
 - The feed only shows friends posts
+- On clearing the search bar, remove the search filter
+- Show the user that specifically liked your post, and limit it to 1 like per post per person
